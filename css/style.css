@@ -1,0 +1,810 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --color-bg: #ebebe1;
+  --color-ink: #000000;
+  --color-footer-edge: #f5f5f5;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-typewriter: "Cutive Mono", ui-monospace, monospace;
+  --font-hand: "Just Me Again Down Here", cursive;
+  --font-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 48px;
+  background-color: var(--color-bg);
+}
+
+.nav__logo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 63px;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.nav__links a {
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 80px;
+}
+
+/* Intro greeting */
+.intro {
+  font-family: var(--font-typewriter);
+  font-size: 40px;
+  line-height: 1.17;
+  letter-spacing: -1.2px;
+  margin: 20px 0 48px;
+}
+
+.intro__line {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Staggered indentation to match the design */
+.intro__line--1 { margin-left: 0; }
+.intro__line--2 { margin-left: 25px; }
+.intro__line--3 { margin-left: 50px; }
+.intro__line--4 { margin-left: 75px; }
+
+/* Hand-drawn circle around "Laura" */
+.intro__circled {
+  position: relative;
+  display: inline-block;
+}
+
+.intro__ellipse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: auto;
+  transform: translate(-50%, -50%) rotate(-12.76deg);
+  pointer-events: none;
+}
+
+/* Photo with clamp + caption */
+.photo {
+  position: relative;
+  margin: 0;
+  padding-top: 42px; /* room for the clamp overhang */
+  width: 353px;
+  max-width: 100%;
+}
+
+.photo__clamp {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: auto;
+  z-index: 2;
+}
+
+.photo__img {
+  width: 100%;
+  height: auto;
+}
+
+.photo__caption {
+  position: absolute;
+  right: -70px;
+  bottom: -34px;
+  font-family: var(--font-hand);
+  font-size: 24px;
+  letter-spacing: -0.24px;
+  transform: rotate(-7.85deg);
+  white-space: nowrap;
+}
+
+/* Skills marquee-style list */
+.skills {
+  margin: 120px 0 0;
+  font-family: var(--font-typewriter);
+  font-size: 35px;
+  line-height: 1.17;
+  letter-spacing: -1.05px;
+  text-align: center;
+}
+
+.skills span {
+  display: block;
+}
+
+/* ---------- Projects page ---------- */
+.projects-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 720px;
+  background-color: var(--color-bg);
+  overflow: hidden;
+}
+
+.projects-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../images/projects-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+}
+
+.projects-hero__title {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-typewriter);
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.projects-body {
+  background-color: var(--color-bg);
+  padding-bottom: 80px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.projects-grid__item {
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.projects-grid__item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.projects-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projects-note {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 32px;
+  letter-spacing: -0.32px;
+  line-height: 1.2;
+}
+
+.projects-note--left {
+  max-width: 1280px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+}
+
+.projects-note--right {
+  max-width: 1280px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  font-size: 24px;
+  letter-spacing: -0.24px;
+  text-align: right;
+  transform: rotate(-0.31deg);
+}
+
+.projects-intro {
+  max-width: 890px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.28px;
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 10px;
+  border-top: 1px solid var(--color-footer-edge);
+  background: linear-gradient(90deg, #ebebe1 0%, #e1dbcb 100%);
+}
+
+.footer__content {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.footer__content a {
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 800px) {
+  .nav {
+    padding: 20px 24px;
+  }
+  .nav__links {
+    gap: 32px;
+  }
+  .intro {
+    font-size: 30px;
+    letter-spacing: -0.9px;
+  }
+  .intro__line--2 { margin-left: 18px; }
+  .intro__line--3 { margin-left: 36px; }
+  .intro__line--4 { margin-left: 54px; }
+  .intro__ellipse { width: 120px; }
+  .skills {
+    font-size: 24px;
+    letter-spacing: -0.7px;
+    margin-top: 90px;
+  }
+  .projects-hero {
+    height: 420px;
+  }
+  .projects-hero__title {
+    font-size: 48px;
+  }
+  .projects-note {
+    font-size: 26px;
+  }
+  .projects-intro {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .nav__links {
+    gap: 24px;
+  }
+  .intro {
+    font-size: 24px;
+    letter-spacing: -0.6px;
+  }
+  .intro__line { white-space: normal; }
+  .intro__line--2 { margin-left: 12px; }
+  .intro__line--3 { margin-left: 24px; }
+  .intro__line--4 { margin-left: 36px; }
+  .intro__ellipse { width: 96px; }
+  .photo__caption {
+    right: -40px;
+    font-size: 20px;
+  }
+  .skills {
+    font-size: 18px;
+    letter-spacing: -0.4px;
+    margin-top: 72px;
+  }
+  .footer__content {
+    font-size: 14px;
+  }
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .projects-hero {
+    height: 320px;
+  }
+  .projects-hero__title {
+    font-size: 36px;
+  }
+  .projects-note {
+    font-size: 22px;
+  }
+  .projects-note--right {
+    font-size: 20px;
+  }
+  .projects-intro {
+    font-size: 18px;
+  }
+}
+
+/* ---------- About page ---------- */
+/* The collage is a fixed 1280x2218 composition. Positions and sizes are
+   expressed as percentages of that canvas and type is sized in cqw, so the
+   whole arrangement scales as one piece instead of reflowing. */
+.about-collage {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  aspect-ratio: 1280 / 2218;
+}
+
+.about-item {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.about-item--1 { left: -4.4531%; top: 53.7421%; width: 44.4254%; height: 25.3832%; }
+.about-item--2 { left: 70.5469%; top: 37.3309%; width: 19.5312%; height: 11.2714%; }
+.about-item--3 { left: 32.1875%; top: 9.6483%; width: 38.3594%; height: 27.6826%; }
+.about-item--4 { left: 8.125%; top: 39.7205%; width: 28.75%; height: 16.5915%; }
+.about-item--5 { left: 14.6875%; top: 9.8287%; width: 20.7031%; height: 16.4563%; }
+.about-item--6 { left: 45.6252%; top: 45.1307%; width: 62.5927%; height: 37.7107%; }
+.about-item--7 { left: 40%; top: 66.4563%; width: 21.0156%; height: 18.3499%; }
+.about-item--8 { left: 74.6875%; top: 19.7926%; width: 18.3594%; height: 10.6402%; }
+.about-item--9 { left: 17.7344%; top: 75.0225%; width: 18.125%; height: 13.0298%; }
+.about-item--10 { left: 29.1406%; top: 53.1559%; width: 32.9596%; height: 18.0569%; }
+.about-item--11 { left: 39.5312%; top: 32.5068%; width: 25.9375%; height: 22.7232%; }
+.about-item--12 { left: 6.9531%; top: 22.5879%; width: 20.3125%; height: 15.6447%; }
+
+.about-item--1 img { width: 62.605%; height: 79.0409%; transform: rotate(-132.43deg); }
+.about-item--6 img { width: 57.9922%; height: 83.5211%; transform: rotate(39.72deg) skewX(0.28deg); }
+.about-item--10 img { width: 55.5991%; height: 87.8507%; transform: rotate(-52.41deg); }
+
+.about-num {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 3.2812%;
+  height: 2.3895%;
+  font-family: var(--font-serif);
+  font-size: 2.1875cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.about-num--1 { left: 8.125%; top: 60.1443%; }
+.about-num--2 { left: 73.5156%; top: 36.6096%; }
+.about-num--3 { left: 42.3438%; top: 12.7142%; }
+.about-num--4 { left: 11.4062%; top: 39.7205%; }
+.about-num--5 { left: 17.8906%; top: 12.7142%; }
+.about-num--6 { left: 64.5312%; top: 56.312%; }
+.about-num--7 { left: 38.4375%; top: 66.4563%; }
+.about-num--8 { left: 75.7812%; top: 17.4031%; }
+.about-num--9 { left: 17.7344%; top: 72.7232%; }
+.about-num--10 { left: 35.1562%; top: 54.6438%; }
+.about-num--11 { left: 40%; top: 34.9414%; }
+.about-num--12 { left: 7.6563%; top: 22.2723%; }
+
+.about-note {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30.0463%;
+  height: 4.1734%;
+  font-family: var(--font-hand);
+  font-size: 2.5cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.about-note--a { left: 66.0938%; top: 8.7722%; }
+.about-note--b { left: 6.0156%; top: 89.6559%; }
+
+.about-skills__title {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 68.125%;
+  top: 75.0225%;
+  width: 22.3438%;
+  height: 3.8323%;
+  font-family: var(--font-serif);
+  font-size: 1.5625cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Hand-drawn circle around the word "SKILLS" */
+.about-skills__circle {
+  position: absolute;
+  left: 70.3908%;
+  top: 75.1127%;
+  width: 7.5392%;
+  height: 3.6702%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Kept as a block so the <li> markers survive — a flex container would
+   blockify the items and suppress their numbering. `top` is therefore the
+   first line of text, not the centred box Figma draws around it. */
+.about-skills__list {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: decimal;
+  font-family: var(--font-serif);
+  font-size: 1.171875cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.about-skills__list li {
+  margin-inline-start: 1.7578cqw; /* 22.5px at the 1280px canvas width */
+}
+
+.about-skills__list--a { left: 68.0469%; top: 78.0208%; width: 22.4219%; }
+.about-skills__list--b { left: 77.8125%; top: 76.6006%; width: 23.2031%; }
+
+/* ---------- Contact page ---------- */
+/* Like the About collage, this is a fixed composition (1280 wide, 1464 tall
+   between nav and footer) positioned in percentages of that canvas, so the
+   envelope and its overlaid text scale together. */
+.contact-stage {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  aspect-ratio: 1280 / 1464;
+}
+
+.contact-envelope {
+  position: absolute;
+  margin: 0;
+  left: 25.7031%;
+  top: 10.9973%;
+  width: 48.5938%;
+  height: 75.4781%;
+}
+
+.contact-envelope img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.contact-invited {
+  position: absolute;
+  margin: 0;
+  left: 31.5625%;
+  top: 37.4527%;
+  width: 36.875%;
+  height: 11.3763%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 5cqw;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.contact-blurb {
+  position: absolute;
+  margin: 0;
+  left: 36.5625%;
+  top: 57.9918%;
+  width: 26.875%;
+  height: 8.6749%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 2.1875cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.contact-blurb a {
+  text-decoration: none;
+}
+
+.contact-note {
+  position: absolute;
+  margin: 0;
+  left: 60%;
+  top: 70.7798%;
+  width: 26.0523%;
+  height: 10.1525%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 1.875cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  transform: rotate(-13deg);
+}
+
+/* ---------- Utilities ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Project detail pages ---------- */
+/* Shared template for the individual project pages under projects/. Stacked,
+   centred header (title, skills marquee, description) above a 3-column image
+   grid whose cells hold either a photo or a grey placeholder. */
+.pdetail {
+  flex: 1 0 auto;
+  padding: 0 24px 80px;
+}
+
+.pdetail__title {
+  margin: 40px 0 0;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  text-align: center;
+}
+
+/* Single overflowing line, clipped at the viewport edges as in the design */
+.pdetail__marquee {
+  margin: 68px 0 0;
+  font-family: var(--font-typewriter);
+  font-size: 30px;
+  line-height: 1.17;
+  letter-spacing: -0.9px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pdetail__intro {
+  max-width: 890px;
+  margin: 70px auto 0;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.28px;
+  text-align: center;
+}
+
+.pdetail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 11px;
+  row-gap: 12px;
+  max-width: 1280px;
+  margin: 96px auto 0;
+}
+
+.pdetail-grid__cell {
+  margin: 0;
+  aspect-ratio: 419 / 608;
+  overflow: hidden;
+  background-color: #d9d9d9;
+}
+
+.pdetail-grid__cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 800px) {
+  .pdetail__title { font-size: 26px; }
+  .pdetail__marquee { font-size: 22px; }
+  .pdetail__intro { font-size: 22px; }
+  .pdetail-grid { margin-top: 64px; }
+}
+
+@media (max-width: 520px) {
+  .pdetail__marquee { font-size: 18px; }
+  .pdetail__intro { font-size: 18px; }
+  .pdetail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Project canvas pages (bespoke layouts) ---------- */
+/* tedxie, radisson, mango, lets-cook and beefeater each compose photos in a
+   unique arrangement, so — like the About collage — each is a fixed-ratio
+   canvas with everything positioned as a percentage of it and type in cqw.
+   overflow:hidden clips the images that intentionally bleed past the edges. */
+.pcanvas {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.pcanvas--tedxie { aspect-ratio: 1280 / 2027; }
+.pcanvas--radisson { aspect-ratio: 1280 / 2027; }
+.pcanvas--mango { aspect-ratio: 1280 / 2085; }
+.pcanvas--letscook { aspect-ratio: 1280 / 2844; }
+.pcanvas--beefeater { aspect-ratio: 1280 / 1696; }
+
+.pcanvas__title {
+  position: absolute;
+  left: 15.2344%;
+  width: 69.5312%;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 2.5cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* One overflowing line, centred and clipped at the canvas edges */
+.pcanvas__marquee {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-typewriter);
+  font-size: 2.34375cqw;
+  line-height: 1.17;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.pcanvas__intro {
+  position: absolute;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 2.1875cqw;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.pcanvas__img {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+}
+
+.pcanvas__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Transparent product/subject cut-outs must show whole, not be cropped */
+.pcanvas__img--contain img {
+  object-fit: contain;
+}
+
+.pcanvas__img--empty {
+  background-color: #d9d9d9;
+}
+
+/* tedxie — 7-image bento; description sits below the grid */
+.pcanvas--tedxie .pcanvas__title { top: 5.3281%; }
+.pcanvas--tedxie .pcanvas__marquee { top: 12.9255%; }
+.pcanvas--tedxie .pcanvas__intro { left: 15.3906%; top: 86.7292%; width: 69.5312%; }
+.tx-i1 { left: -0.0781%; top: 20.1776%; width: 33.5938%; height: 26.2457%; }
+.tx-i2 { left: 33.5156%; top: 20.1776%; width: 33.2031%; height: 26.2457%; }
+.tx-i3 { left: 66.7188%; top: 20.1776%; width: 33.2031%; height: 26.2457%; }
+.tx-i4 { left: -1.7969%; top: 46.4233%; width: 63.5938%; height: 17.2176%; }
+.tx-i5 { left: 61.7969%; top: 46.4233%; width: 38.125%; height: 17.2176%; }
+.tx-i6 { left: -0.0781%; top: 63.6408%; width: 32.4219%; height: 18.1549%; }
+.tx-i7 { left: 32.3438%; top: 63.6408%; width: 67.6562%; height: 18.1549%; }
+
+/* radisson — a row of three (middle real, sides grey) plus a wide banner */
+.pcanvas--radisson .pcanvas__title { top: 5.3281%; }
+.pcanvas--radisson .pcanvas__marquee { top: 12.9255%; }
+.pcanvas--radisson .pcanvas__intro { left: 16.4062%; top: 19.7336%; width: 69.5312%; }
+.rad-i1 { left: 0.0781%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
+.rad-i2 { left: 33.5938%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
+.rad-i3 { left: 67.1094%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
+.rad-wide { left: 11.1719%; top: 62.9502%; width: 77.6562%; height: 12.1855%; }
+
+/* mango — layered: field photo, newspaper clipping, standing-figure cut-out */
+.pcanvas--mango .pcanvas__title { top: 4.8441%; }
+.pcanvas--mango .pcanvas__marquee { top: 12.5659%; }
+.pcanvas--mango .pcanvas__intro { left: 15.2344%; top: 81.3429%; width: 69.5312%; }
+.mango-i1 { left: -1.7188%; top: 39.8082%; width: 119.6875%; height: 32.3741%; }
+.mango-i1 img { object-position: top; } /* crop the "THANK YOU" caption at the foot of the source photo */
+.mango-i2 { left: -18.0469%; top: 17.8417%; width: 90.625%; height: 31.271%; }
+.mango-i3 { left: 67.2656%; top: 17.6019%; width: 32.5781%; height: 57.458%; }
+
+/* lets-cook — banner, centred dish with a chicken cut-out, then a pair */
+.pcanvas--letscook .pcanvas__title { top: 3.7975%; }
+.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; }
+.pcanvas--letscook .pcanvas__intro { left: 15.2344%; top: 89.9789%; width: 69.5312%; }
+.lc-banner { left: -0.0781%; top: 14.9437%; width: 100.1562%; height: 27.4262%; }
+.lc-center { left: 25.5469%; top: 43.7412%; width: 73.2031%; height: 18.5654%; }
+.lc-chicken { left: 10.1562%; top: 45.4599%; width: 23.8531%; height: 15.1206%; }
+.lc-l { left: -0.1562%; top: 68.2138%; width: 48.9062%; height: 15.5767%; }
+.lc-r { left: 51.1719%; top: 68.2138%; width: 48.9844%; height: 15.5767%; }
+
+/* beefeater — a grey band with a central shot flanked by bottle and jukebox */
+.pcanvas--beefeater .pcanvas__title { top: 5.9552%; }
+.pcanvas--beefeater .pcanvas__marquee { top: 15.4481%; }
+.pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 24.8821%; width: 69.5312%; }
+.beef-band { left: 0%; top: 68.4552%; width: 100%; height: 28.4198%; }
+.beef-main { left: 13.75%; top: 42.4528%; width: 74.5312%; height: 31.6627%; }
+.beef-left { left: 6.6406%; top: 47.4057%; width: 17.1875%; height: 26.7689%; }
+.beef-right { left: 77.6562%; top: 49.6462%; width: 16.25%; height: 20.9316%; }
