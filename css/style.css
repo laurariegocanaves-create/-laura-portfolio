@@ -88,7 +88,7 @@ a {
   font-size: 40px;
   line-height: 1.17;
   letter-spacing: -1.2px;
-  margin: 20px 0 48px;
+  margin: 20px 0 12px;
 }
 
 .intro__line {
@@ -112,7 +112,8 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 150px;
+  width: 158px;
+  max-width: none; /* must be allowed to overflow the word it circles */
   height: auto;
   transform: translate(-50%, -50%) rotate(-12.76deg);
   pointer-events: none;
@@ -122,7 +123,7 @@ a {
 .photo {
   position: relative;
   margin: 0;
-  padding-top: 42px; /* room for the clamp overhang */
+  padding-top: 62px; /* photo starts inside the clamp jaw, so only the jaw overlaps it */
   width: 353px;
   max-width: 100%;
 }
@@ -132,7 +133,7 @@ a {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 92px;
+  width: 100px;
   height: auto;
   z-index: 2;
 }
@@ -270,14 +271,13 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 10px;
-  border-top: 1px solid var(--color-footer-edge);
-  background: linear-gradient(90deg, #ebebe1 0%, #e1dbcb 100%);
+  padding: 18px 10px;
+  background: var(--color-bg);
 }
 
 .footer__content {
   margin: 0;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.1;
   text-align: center;
 }
@@ -302,7 +302,7 @@ a {
   .intro__line--2 { margin-left: 18px; }
   .intro__line--3 { margin-left: 36px; }
   .intro__line--4 { margin-left: 54px; }
-  .intro__ellipse { width: 120px; }
+  .intro__ellipse { width: 128px; }
   .skills {
     font-size: 24px;
     letter-spacing: -0.7px;
@@ -339,9 +339,10 @@ a {
   .intro__line--2 { margin-left: 12px; }
   .intro__line--3 { margin-left: 24px; }
   .intro__line--4 { margin-left: 36px; }
-  .intro__ellipse { width: 96px; }
+  .intro__ellipse { width: 104px; }
   .photo__caption {
-    right: -40px;
+    right: 0;
+    bottom: -30px;
     font-size: 20px;
   }
   .skills {
@@ -350,7 +351,7 @@ a {
     margin-top: 72px;
   }
   .footer__content {
-    font-size: 14px;
+    font-size: 12px;
   }
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
