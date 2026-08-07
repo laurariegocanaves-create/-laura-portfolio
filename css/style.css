@@ -792,7 +792,7 @@ a {
 
 /* radisson — a row of three (middle real, sides grey) plus a wide banner */
 .pcanvas--radisson .pcanvas__title { top: 6.8225%; }
-.pcanvas--radisson .pcanvas__marquee { font-size: 1.62cqw; top: 16.5508%; }
+.pcanvas--radisson .pcanvas__marquee { font-size: 1.5cqw; top: 16.5508%; }
 .pcanvas--radisson .pcanvas__intro { left: 16.4062%; top: 25.2685%; width: 69.5312%; }
 /* video sits in the same frame as a photo would */
 .pcanvas__img video {
