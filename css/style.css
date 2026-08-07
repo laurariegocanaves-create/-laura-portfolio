@@ -1,5 +1,8 @@
 /* ---------- Design tokens ---------- */
 :root {
+  /* Width is capped by screen height as well as width, so short laptop screens
+     get a proportionally smaller layout instead of an oversized one. */
+  --page-max: min(1160px, 94vw, 125vh);
   --color-bg: #ebebe1;
   --color-ink: #000000;
   --color-footer-edge: #f5f5f5;
@@ -52,7 +55,7 @@ a {
 
 .nav__logo {
   font-family: var(--font-mono);
-  font-weight: 500;
+  font-weight: 400; /* matches the nav links on the right */
   font-size: 14px;
   letter-spacing: 1.4px;
   text-decoration: none;
@@ -85,10 +88,10 @@ a {
 /* Intro greeting */
 .intro {
   font-family: var(--font-typewriter);
-  font-size: 40px;
+  font-size: clamp(26px, 3.6vh, 40px);
   line-height: 1.17;
   letter-spacing: -1.2px;
-  margin: 20px 0 12px;
+  margin: clamp(8px, 1.4vh, 20px) 0 clamp(8px, 1.2vh, 12px);
 }
 
 .intro__line {
@@ -112,7 +115,7 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 158px;
+  width: 3.95em; /* in em so the circle tracks the headline at any screen size */
   max-width: none; /* must be allowed to overflow the word it circles */
   height: auto;
   transform: translate(-50%, -50%) rotate(-12.76deg);
@@ -123,8 +126,11 @@ a {
 .photo {
   position: relative;
   margin: 0;
-  padding-top: 62px; /* photo starts inside the clamp jaw, so only the jaw overlaps it */
-  width: 353px;
+  --photo-w: clamp(190px, 33vh, 353px);
+  width: var(--photo-w);
+  /* both the overhang and the clamp are tied to the photo width, so the jaw
+     keeps gripping the top edge at every screen size */
+  padding-top: calc(var(--photo-w) * 0.176);
   max-width: 100%;
 }
 
@@ -133,7 +139,7 @@ a {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
+  width: calc(var(--photo-w) * 0.283);
   height: auto;
   z-index: 2;
 }
@@ -156,9 +162,9 @@ a {
 
 /* Skills marquee-style list */
 .skills {
-  margin: 120px 0 0;
+  margin: clamp(32px, 5.5vh, 120px) 0 0;
   font-family: var(--font-typewriter);
-  font-size: 35px;
+  font-size: clamp(24px, 3.1vh, 35px);
   line-height: 1.17;
   letter-spacing: -1.05px;
   text-align: center;
@@ -208,7 +214,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 0 auto;
 }
 
@@ -239,13 +245,13 @@ a {
 }
 
 .projects-note--left {
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 48px auto 0;
   padding: 0 24px;
 }
 
 .projects-note--right {
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 40px auto 0;
   padding: 0 24px;
   font-size: 24px;
@@ -302,7 +308,6 @@ a {
   .intro__line--2 { margin-left: 18px; }
   .intro__line--3 { margin-left: 36px; }
   .intro__line--4 { margin-left: 54px; }
-  .intro__ellipse { width: 128px; }
   .skills {
     font-size: 24px;
     letter-spacing: -0.7px;
@@ -339,7 +344,6 @@ a {
   .intro__line--2 { margin-left: 12px; }
   .intro__line--3 { margin-left: 24px; }
   .intro__line--4 { margin-left: 36px; }
-  .intro__ellipse { width: 104px; }
   .photo__caption {
     right: 0;
     bottom: -30px;
@@ -381,10 +385,11 @@ a {
   container-type: inline-size;
   position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 0 auto;
   aspect-ratio: 1280 / 2218;
-  overflow: hidden; /* clip tiles that bleed past the artboard, as Figma does */
+  overflow: hidden;
+  max-width: calc(var(--page-max) * 0.72); /* clip tiles that bleed past the artboard, as Figma does */
 }
 
 .about-item {
@@ -400,10 +405,6 @@ a {
   height: 100%;
   object-fit: contain;
 }
-
-/* Each tile is scaled about its own centre, so the composition keeps its
-   layout while the photos themselves read smaller. */
-.about-item { transform: scale(0.82); }
 
 .about-item--1 { left: -4.4531%; top: 53.7421%; width: 44.4254%; height: 25.3832%; }
 .about-item--2 { left: 70.5469%; top: 37.3309%; width: 19.5312%; height: 11.2714%; }
@@ -431,7 +432,7 @@ a {
   width: 3.2812%;
   height: 2.3895%;
   font-family: var(--font-serif);
-  font-size: 1.65cqw;
+  font-size: 2.1875cqw;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -442,7 +443,7 @@ a {
 .about-num--4 { left: 11.4062%; top: 39.7205%; }
 .about-num--5 { left: 17.8906%; top: 12.7142%; }
 .about-num--6 { left: 64.5312%; top: 56.312%; }
-.about-num--7 { left: 38.4375%; top: 66.4563%; }
+.about-num--7 { left: 39.6%; top: 67.4%; }
 .about-num--8 { left: 75.7812%; top: 17.4031%; }
 .about-num--9 { left: 17.7344%; top: 72.7232%; }
 .about-num--10 { left: 35.1562%; top: 54.6438%; }
@@ -473,12 +474,12 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  left: 68.125%;
-  top: 75.0225%;
-  width: 22.3438%;
+  left: 72.0%;
+  top: 74.2%;
+  width: 27%;
   height: 3.8323%;
   font-family: var(--font-serif);
-  font-size: 1.5625cqw;
+  font-size: 1.9cqw;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -487,9 +488,9 @@ a {
    measured from the rendered text rather than eyeballed. */
 .about-skills__circle {
   position: absolute;
-  left: 73.5291%;   /* horizontal centre of the word "SKILLS" */
-  top: 76.9380%;    /* vertical centre of the word "SKILLS"   */
-  width: 8.6%;
+  left: 78.564%;   /* horizontal centre of the word "SKILLS" */
+  top: 76.063%;    /* vertical centre of the word "SKILLS"   */
+  width: 11.4%;
   height: auto;
   max-width: none;
   transform: translate(-50%, -50%);
@@ -505,17 +506,17 @@ a {
   padding: 0;
   list-style: decimal;
   font-family: var(--font-serif);
-  font-size: 1.171875cqw;
+  font-size: 1.36cqw;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
 .about-skills__list li {
-  margin-inline-start: 1.7578cqw; /* 22.5px at the 1280px canvas width */
+  margin-inline-start: 2.0cqw;
 }
 
-.about-skills__list--a { left: 68.0469%; top: 78.0208%; width: 22.4219%; }
-.about-skills__list--b { left: 77.8125%; top: 76.6006%; width: 23.2031%; }
+.about-skills__list--a { left: 72.8%; top: 78.3%; width: 12%; }
+.about-skills__list--b { left: 83.598%; top: 78.3%; width: 16.402%; }
 
 /* ---------- Contact page ---------- */
 /* Like the About collage, this is a fixed composition (1280 wide, 1464 tall
@@ -525,7 +526,7 @@ a {
   container-type: inline-size;
   position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 0 auto;
   aspect-ratio: 1280 / 1464;
 }
@@ -661,7 +662,7 @@ a {
   grid-template-columns: repeat(3, 1fr);
   column-gap: 11px;
   row-gap: 12px;
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 96px auto 0;
 }
 
@@ -710,7 +711,7 @@ a {
   container-type: inline-size;
   position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin: 0 auto;
   overflow: hidden;
 }
@@ -719,7 +720,7 @@ a {
 .pcanvas--radisson { aspect-ratio: 1280 / 1583; }
 .pcanvas--mango { aspect-ratio: 1280 / 2085; }
 .pcanvas--letscook { aspect-ratio: 1280 / 2844; }
-.pcanvas--beefeater { aspect-ratio: 1280 / 1941; }
+.pcanvas--beefeater { aspect-ratio: 1280 / 1733; }
 
 .pcanvas__title {
   position: absolute;
@@ -828,10 +829,10 @@ a {
 .lc-r { left: 51.1719%; top: 68.2138%; width: 48.9844%; height: 15.5767%; }
 
 /* beefeater — a grey band with a central shot flanked by bottle and jukebox */
-.pcanvas--beefeater .pcanvas__title { top: 5.2035%; }
-.pcanvas--beefeater .pcanvas__marquee { font-size: 1.42cqw; top: 13.4982%; }
-.pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 21.7414%; width: 69.5312%; }
-.beef-band { left: 0%; top: 59.8145%; width: 100%; height: 37.0943%; }
-.beef-main { left: 13.75%; top: 37.0943%; width: 74.5312%; height: 27.6661%; }
-.beef-left { left: 6.6406%; top: 41.422%; width: 17.1875%; height: 23.39%; }
-.beef-right { left: 77.6562%; top: 43.3797%; width: 16.25%; height: 18.2895%; }
+.pcanvas--beefeater .pcanvas__title { top: 5.828%; }
+.pcanvas--beefeater .pcanvas__marquee { font-size: 1.42cqw; top: 15.1183%; }
+.pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 24.3509%; width: 69.5312%; }
+.beef-band { left: 0%; top: 66.9936%; width: 100%; height: 29.5442%; }
+.beef-main { left: 13.75%; top: 41.5465%; width: 74.5312%; height: 30.9866%; }
+.beef-left { left: 6.6406%; top: 46.3936%; width: 17.1875%; height: 26.1973%; transform: scale(1.45); }
+.beef-right { left: 77.6562%; top: 48.5862%; width: 16.25%; height: 20.4847%; transform: scale(1.45); }
