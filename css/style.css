@@ -180,7 +180,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 720px;
+  height: 300px;
   background-color: var(--color-bg);
   overflow: hidden;
 }
@@ -189,10 +189,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../images/projects-hero.jpg");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.8;
+  background: none;
 }
 
 .projects-hero__title {
@@ -200,7 +197,7 @@ a {
   margin: 0;
   font-family: var(--font-typewriter);
   font-weight: 400;
-  font-size: 64px;
+  font-size: 42px;
   line-height: 1.2;
   text-align: center;
 }
@@ -314,10 +311,10 @@ a {
     margin-top: 90px;
   }
   .projects-hero {
-    height: 420px;
+    height: 240px;
   }
   .projects-hero__title {
-    font-size: 48px;
+    font-size: 34px;
   }
   .projects-note {
     font-size: 26px;
@@ -361,10 +358,10 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
   .projects-hero {
-    height: 320px;
+    height: 190px;
   }
   .projects-hero__title {
-    font-size: 36px;
+    font-size: 26px;
   }
   .projects-note {
     font-size: 22px;
@@ -382,141 +379,30 @@ a {
    expressed as percentages of that canvas and type is sized in cqw, so the
    whole arrangement scales as one piece instead of reflowing. */
 .about-collage {
-  container-type: inline-size;
-  position: relative;
   width: 100%;
   max-width: var(--page-max);
   margin: 0 auto;
-  aspect-ratio: 1280 / 2218;
-  overflow: hidden;
-  max-width: calc(var(--page-max) * 0.72); /* clip tiles that bleed past the artboard, as Figma does */
+  padding: 0 32px 40px;
+  box-sizing: border-box;
 }
 
-.about-item {
-  position: absolute;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.about-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 
-.about-item--1 { left: -4.4531%; top: 53.7421%; width: 44.4254%; height: 25.3832%; }
-.about-item--2 { left: 70.5469%; top: 37.3309%; width: 19.5312%; height: 11.2714%; }
-.about-item--3 { left: 32.1875%; top: 9.6483%; width: 38.3594%; height: 27.6826%; }
-.about-item--4 { left: 8.125%; top: 39.7205%; width: 28.75%; height: 16.5915%; }
-.about-item--5 { left: 14.6875%; top: 9.8287%; width: 20.7031%; height: 16.4563%; }
-.about-item--6 { left: 45.6252%; top: 45.1307%; width: 62.5927%; height: 37.7107%; }
-.about-item--7 { left: 40%; top: 66.4563%; width: 21.0156%; height: 18.3499%; }
-.about-item--8 { left: 74.6875%; top: 19.7926%; width: 18.3594%; height: 10.6402%; }
-.about-item--9 { left: 17.7344%; top: 75.0225%; width: 18.125%; height: 13.0298%; }
-.about-item--10 { left: 29.1406%; top: 53.1559%; width: 32.9596%; height: 18.0569%; }
-.about-item--11 { left: 39.5312%; top: 32.5068%; width: 25.9375%; height: 22.7232%; }
-.about-item--12 { left: 6.9531%; top: 22.5879%; width: 20.3125%; height: 15.6447%; }
 
-.about-item--1 img { width: 62.605%; height: 79.0409%; transform: rotate(-132.43deg); }
-.about-item--6 img { width: 57.9922%; height: 83.5211%; transform: rotate(39.72deg) skewX(0.28deg); }
-.about-item--10 img { width: 55.5991%; height: 87.8507%; transform: rotate(-52.41deg); }
 
-.about-num {
-  position: absolute;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 3.2812%;
-  height: 2.3895%;
-  font-family: var(--font-serif);
-  font-size: 2.1875cqw;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
 
-.about-num--1 { left: 8.125%; top: 60.1443%; }
-.about-num--2 { left: 73.5156%; top: 36.6096%; }
-.about-num--3 { left: 42.3438%; top: 12.7142%; }
-.about-num--4 { left: 11.4062%; top: 39.7205%; }
-.about-num--5 { left: 17.8906%; top: 12.7142%; }
-.about-num--6 { left: 64.5312%; top: 56.312%; }
-.about-num--7 { left: 39.6%; top: 67.4%; }
-.about-num--8 { left: 75.7812%; top: 17.4031%; }
-.about-num--9 { left: 17.7344%; top: 72.7232%; }
-.about-num--10 { left: 35.1562%; top: 54.6438%; }
-.about-num--11 { left: 40%; top: 34.9414%; }
-.about-num--12 { left: 7.6563%; top: 22.2723%; }
 
-.about-note {
-  position: absolute;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 30.0463%;
-  height: 4.1734%;
-  font-family: var(--font-hand);
-  font-size: 2.5cqw;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
 
-.about-note--a { left: 66.0938%; top: 8.7722%; }
-.about-note--b { left: 6.0156%; top: 89.6559%; }
 
-.about-skills__title {
-  position: absolute;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  left: 72.0%;
-  top: 74.2%;
-  width: 27%;
-  height: 3.8323%;
-  font-family: var(--font-serif);
-  font-size: 1.9cqw;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
 
 /* Hand-drawn circle around the word "SKILLS" — sized and centred on the word,
    measured from the rendered text rather than eyeballed. */
-.about-skills__circle {
-  position: absolute;
-  left: 78.564%;   /* horizontal centre of the word "SKILLS" */
-  top: 76.063%;    /* vertical centre of the word "SKILLS"   */
-  width: 11.4%;
-  height: auto;
-  max-width: none;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
 
 /* Kept as a block so the <li> markers survive — a flex container would
    blockify the items and suppress their numbering. `top` is therefore the
    first line of text, not the centred box Figma draws around it. */
-.about-skills__list {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  list-style: decimal;
-  font-family: var(--font-serif);
-  font-size: 1.36cqw;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
 
-.about-skills__list li {
-  margin-inline-start: 2.0cqw;
-}
 
-.about-skills__list--a { left: 72.8%; top: 78.3%; width: 12%; }
-.about-skills__list--b { left: 83.598%; top: 78.3%; width: 16.402%; }
 
 /* ---------- Contact page ---------- */
 /* Like the About collage, this is a fixed composition (1280 wide, 1464 tall
@@ -836,3 +722,68 @@ a {
 .beef-main { left: 13.75%; top: 41.5465%; width: 74.5312%; height: 30.9866%; }
 .beef-left { left: 6.6406%; top: 46.3936%; width: 17.1875%; height: 26.1973%; transform: scale(1.45); }
 .beef-right { left: 77.6562%; top: 48.5862%; width: 16.25%; height: 20.4847%; transform: scale(1.45); }
+
+
+/* ---------- About: 3-across grid ---------- */
+.about-note {
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2vw, 28px);
+}
+.about-note--a { text-align: right; margin-top: 48px; }
+.about-note--b { text-align: left; margin-top: 40px; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+  margin-top: 24px;
+}
+
+.about-cell {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.about-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+.about-cell__num {
+  font-family: var(--font-serif);
+  font-size: clamp(14px, 1.5vw, 20px);
+  line-height: 1;
+}
+
+.about-skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 32px;
+  margin-top: 56px;
+}
+.about-skills__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.9vw, 26px);
+  white-space: nowrap;
+}
+.about-skills__list {
+  margin: 0;
+  padding: 0 0 0 1.4em;
+  font-family: var(--font-serif);
+  font-size: clamp(13px, 1.25vw, 17px);
+  line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+  .about-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 20px; }
+}
+@media (max-width: 520px) {
+  .about-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+}
