@@ -384,6 +384,7 @@ a {
   max-width: 1280px;
   margin: 0 auto;
   aspect-ratio: 1280 / 2218;
+  overflow: hidden; /* clip tiles that bleed past the artboard, as Figma does */
 }
 
 .about-item {
@@ -399,6 +400,10 @@ a {
   height: 100%;
   object-fit: contain;
 }
+
+/* Each tile is scaled about its own centre, so the composition keeps its
+   layout while the photos themselves read smaller. */
+.about-item { transform: scale(0.82); }
 
 .about-item--1 { left: -4.4531%; top: 53.7421%; width: 44.4254%; height: 25.3832%; }
 .about-item--2 { left: 70.5469%; top: 37.3309%; width: 19.5312%; height: 11.2714%; }
@@ -426,7 +431,7 @@ a {
   width: 3.2812%;
   height: 2.3895%;
   font-family: var(--font-serif);
-  font-size: 2.1875cqw;
+  font-size: 1.65cqw;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -478,14 +483,16 @@ a {
   letter-spacing: -0.01em;
 }
 
-/* Hand-drawn circle around the word "SKILLS" */
+/* Hand-drawn circle around the word "SKILLS" — sized and centred on the word,
+   measured from the rendered text rather than eyeballed. */
 .about-skills__circle {
   position: absolute;
-  left: 70.3908%;
-  top: 75.1127%;
-  width: 7.5392%;
-  height: 3.6702%;
-  object-fit: contain;
+  left: 73.5291%;   /* horizontal centre of the word "SKILLS" */
+  top: 76.9380%;    /* vertical centre of the word "SKILLS"   */
+  width: 8.6%;
+  height: auto;
+  max-width: none;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -574,6 +581,7 @@ a {
 
 .contact-blurb a {
   text-decoration: none;
+  font-size: 0.72em; /* the address reads smaller than the line above it */
 }
 
 .contact-note {
@@ -629,12 +637,13 @@ a {
 .pdetail__marquee {
   margin: 68px 0 0;
   font-family: var(--font-typewriter);
-  font-size: 30px;
-  line-height: 1.17;
-  letter-spacing: -0.9px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(15px, 1.6vw, 22px);
+  line-height: 1.35;
+  letter-spacing: -0.6px;
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .pdetail__intro {
@@ -663,6 +672,14 @@ a {
   background-color: #d9d9d9;
 }
 
+.pdetail-grid__cell video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
 .pdetail-grid__cell img {
   width: 100%;
   height: 100%;
@@ -671,13 +688,13 @@ a {
 
 @media (max-width: 800px) {
   .pdetail__title { font-size: 26px; }
-  .pdetail__marquee { font-size: 22px; }
+
   .pdetail__intro { font-size: 22px; }
   .pdetail-grid { margin-top: 64px; }
 }
 
 @media (max-width: 520px) {
-  .pdetail__marquee { font-size: 18px; }
+
   .pdetail__intro { font-size: 18px; }
   .pdetail-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -699,10 +716,10 @@ a {
 }
 
 .pcanvas--tedxie { aspect-ratio: 1280 / 2027; }
-.pcanvas--radisson { aspect-ratio: 1280 / 2027; }
+.pcanvas--radisson { aspect-ratio: 1280 / 1583; }
 .pcanvas--mango { aspect-ratio: 1280 / 2085; }
 .pcanvas--letscook { aspect-ratio: 1280 / 2844; }
-.pcanvas--beefeater { aspect-ratio: 1280 / 1696; }
+.pcanvas--beefeater { aspect-ratio: 1280 / 1941; }
 
 .pcanvas__title {
   position: absolute;
@@ -763,7 +780,7 @@ a {
 
 /* tedxie — 7-image bento; description sits below the grid */
 .pcanvas--tedxie .pcanvas__title { top: 5.3281%; }
-.pcanvas--tedxie .pcanvas__marquee { top: 12.9255%; }
+.pcanvas--tedxie .pcanvas__marquee { top: 12.9255%; font-size: 1.86cqw; }
 .pcanvas--tedxie .pcanvas__intro { left: 15.3906%; top: 86.7292%; width: 69.5312%; }
 .tx-i1 { left: -0.0781%; top: 20.1776%; width: 33.5938%; height: 26.2457%; }
 .tx-i2 { left: 33.5156%; top: 20.1776%; width: 33.2031%; height: 26.2457%; }
@@ -774,13 +791,22 @@ a {
 .tx-i7 { left: 32.3438%; top: 63.6408%; width: 67.6562%; height: 18.1549%; }
 
 /* radisson — a row of three (middle real, sides grey) plus a wide banner */
-.pcanvas--radisson .pcanvas__title { top: 5.3281%; }
-.pcanvas--radisson .pcanvas__marquee { top: 12.9255%; }
-.pcanvas--radisson .pcanvas__intro { left: 16.4062%; top: 19.7336%; width: 69.5312%; }
-.rad-i1 { left: 0.0781%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
-.rad-i2 { left: 33.5938%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
-.rad-i3 { left: 67.1094%; top: 35.6191%; width: 32.7344%; height: 20.5723%; }
-.rad-wide { left: 11.1719%; top: 62.9502%; width: 77.6562%; height: 12.1855%; }
+.pcanvas--radisson .pcanvas__title { top: 6.8225%; }
+.pcanvas--radisson .pcanvas__marquee { font-size: 1.62cqw; top: 16.5508%; }
+.pcanvas--radisson .pcanvas__intro { left: 16.4062%; top: 25.2685%; width: 69.5312%; }
+/* video sits in the same frame as a photo would */
+.pcanvas__img video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.rad-i1 { left: 0.0781%; top: 45.6095%; width: 32.7344%; height: 26.3424%; }
+.rad-i2 { left: 33.5938%; top: 45.6095%; width: 32.7344%; height: 26.3424%; }
+.rad-i3 { left: 67.1094%; top: 45.6095%; width: 32.7344%; height: 26.3424%; }
+.rad-wide { left: 11.1719%; top: 80.6065%; width: 77.6562%; height: 15.6033%; }
 
 /* mango — layered: field photo, newspaper clipping, standing-figure cut-out */
 .pcanvas--mango .pcanvas__title { top: 4.8441%; }
@@ -793,7 +819,7 @@ a {
 
 /* lets-cook — banner, centred dish with a chicken cut-out, then a pair */
 .pcanvas--letscook .pcanvas__title { top: 3.7975%; }
-.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; }
+.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; font-size: 1.72cqw; }
 .pcanvas--letscook .pcanvas__intro { left: 15.2344%; top: 89.9789%; width: 69.5312%; }
 .lc-banner { left: -0.0781%; top: 14.9437%; width: 100.1562%; height: 27.4262%; }
 .lc-center { left: 25.5469%; top: 43.7412%; width: 73.2031%; height: 18.5654%; }
@@ -802,10 +828,10 @@ a {
 .lc-r { left: 51.1719%; top: 68.2138%; width: 48.9844%; height: 15.5767%; }
 
 /* beefeater — a grey band with a central shot flanked by bottle and jukebox */
-.pcanvas--beefeater .pcanvas__title { top: 5.9552%; }
-.pcanvas--beefeater .pcanvas__marquee { top: 15.4481%; }
-.pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 24.8821%; width: 69.5312%; }
-.beef-band { left: 0%; top: 68.4552%; width: 100%; height: 28.4198%; }
-.beef-main { left: 13.75%; top: 42.4528%; width: 74.5312%; height: 31.6627%; }
-.beef-left { left: 6.6406%; top: 47.4057%; width: 17.1875%; height: 26.7689%; }
-.beef-right { left: 77.6562%; top: 49.6462%; width: 16.25%; height: 20.9316%; }
+.pcanvas--beefeater .pcanvas__title { top: 5.2035%; }
+.pcanvas--beefeater .pcanvas__marquee { font-size: 1.42cqw; top: 13.4982%; }
+.pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 21.7414%; width: 69.5312%; }
+.beef-band { left: 0%; top: 59.8145%; width: 100%; height: 37.0943%; }
+.beef-main { left: 13.75%; top: 37.0943%; width: 74.5312%; height: 27.6661%; }
+.beef-left { left: 6.6406%; top: 41.422%; width: 17.1875%; height: 23.39%; }
+.beef-right { left: 77.6562%; top: 43.3797%; width: 16.25%; height: 18.2895%; }
