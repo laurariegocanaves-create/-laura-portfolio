@@ -50,9 +50,8 @@ a {
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: 10px 0;
+  margin: 0;
+  padding: 10px 32px;
   box-sizing: border-box;
   background-color: var(--color-bg);
 }
@@ -166,7 +165,7 @@ a {
 
 /* Skills marquee-style list */
 .skills {
-  margin: clamp(48px, 7.1vh, 136px) 0 0;
+  margin: clamp(72px, 10vh, 165px) 0 0;
   font-family: var(--font-typewriter);
   font-size: clamp(24px, 3.1vh, 35px);
   line-height: 1.17;
@@ -278,6 +277,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
   padding: 8px 10px;
   background: var(--color-bg);
 }
@@ -287,8 +287,9 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: var(--page-max);
-  margin: 0 auto;
+  margin: 0;
+  padding: 0 32px;
+  box-sizing: border-box;
   font-size: 11px;
   line-height: 1.1;
 }
@@ -617,8 +618,8 @@ a {
 
 .pcanvas--tedxie { aspect-ratio: 1280 / 2027; }
 .pcanvas--radisson { aspect-ratio: 1280 / 1583; }
-.pcanvas--mango { aspect-ratio: 1280 / 2085; }
-.pcanvas--letscook { aspect-ratio: 1280 / 2844; }
+.pcanvas--mango { aspect-ratio: 1280 / 1929; }
+.pcanvas--letscook { aspect-ratio: 1280 / 2779; }
 .pcanvas--beefeater { aspect-ratio: 1280 / 1733; }
 
 .pcanvas__title {
@@ -709,23 +710,23 @@ a {
 .rad-wide { left: 11.1719%; top: 80.6065%; width: 77.6562%; height: 15.6033%; }
 
 /* mango — layered: field photo, newspaper clipping, standing-figure cut-out */
-.pcanvas--mango .pcanvas__title { top: 4.8441%; }
-.pcanvas--mango .pcanvas__marquee { top: 12.5659%; }
-.pcanvas--mango .pcanvas__intro { left: 15.2344%; top: 81.3429%; width: 69.5312%; }
-.mango-i1 { left: -1.7188%; top: 39.8082%; width: 119.6875%; height: 32.3741%; }
+.pcanvas--mango .pcanvas__title { top: 5.2358%; }
+.pcanvas--mango .pcanvas__marquee { top: 13.5821%; }
+.pcanvas--mango .pcanvas__intro { left: 15.2344%; top: 87.9212%; width: 69.5312%; }
+.mango-i1 { left: -1.7188%; top: 43.0275%; width: 119.6875%; height: 34.9922%; }
 .mango-i1 img { object-position: top; } /* crop the "THANK YOU" caption at the foot of the source photo */
-.mango-i2 { left: -18.0469%; top: 17.8417%; width: 90.625%; height: 31.271%; }
-.mango-i3 { left: 67.2656%; top: 17.6019%; width: 32.5781%; height: 57.458%; }
+.mango-i2 { left: -18.0469%; top: 19.2846%; width: 90.625%; height: 33.7999%; }
+.mango-i3 { left: 67.2656%; top: 19.0254%; width: 32.5781%; height: 62.1047%; }
 
 /* lets-cook — banner, centred dish with a chicken cut-out, then a pair */
-.pcanvas--letscook .pcanvas__title { top: 3.7975%; }
-.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; }
-.pcanvas--letscook .pcanvas__intro { left: 15.2344%; top: 89.9789%; width: 69.5312%; }
-.lc-banner { left: -0.0781%; top: 14.9437%; width: 100.1562%; height: 27.4262%; }
-.lc-center { left: 25.5469%; top: 43.7412%; width: 73.2031%; height: 18.5654%; }
-.lc-chicken { left: 10.1562%; top: 45.4599%; width: 23.8531%; height: 15.1206%; }
-.lc-l { left: -0.1562%; top: 68.2138%; width: 48.9062%; height: 15.5767%; }
-.lc-r { left: 51.1719%; top: 68.2138%; width: 48.9844%; height: 15.5767%; }
+.pcanvas--letscook .pcanvas__title { top: 3.8863%; }
+.pcanvas--letscook .pcanvas__marquee { top: 9.4279%; }
+.pcanvas--letscook .pcanvas__intro { left: 15.2344%; top: 91.7459%; width: 69.5312%; }
+.lc-banner { left: -0.0781%; top: 15.2932%; width: 100.1562%; height: 28.0677%; }
+.lc-center { left: 25.5469%; top: 44.7643%; width: 73.2031%; height: 18.9996%; }
+.lc-chicken { left: 10.1562%; top: 46.5232%; width: 23.8531%; height: 15.4743%; }
+.lc-l { left: -0.1562%; top: 69.8093%; width: 48.9062%; height: 15.941%; }
+.lc-r { left: 51.1719%; top: 69.8093%; width: 48.9844%; height: 15.941%; }
 
 /* beefeater — a grey band with a central shot flanked by bottle and jukebox */
 .pcanvas--beefeater .pcanvas__title { top: 5.828%; }
