@@ -91,7 +91,7 @@ a {
   font-size: clamp(26px, 3.6vh, 40px);
   line-height: 1.17;
   letter-spacing: -1.2px;
-  margin: clamp(8px, 1.4vh, 20px) 0 clamp(8px, 1.2vh, 12px);
+  margin: clamp(8px, 1.4vh, 20px) 0 clamp(13px, 1.9vh, 17px);
 }
 
 .intro__line {
@@ -152,7 +152,7 @@ a {
 .photo__caption {
   position: absolute;
   right: -70px;
-  bottom: -34px;
+  bottom: -39px;
   font-family: var(--font-hand);
   font-size: 24px;
   letter-spacing: -0.24px;
@@ -162,7 +162,7 @@ a {
 
 /* Skills marquee-style list */
 .skills {
-  margin: clamp(32px, 5.5vh, 120px) 0 0;
+  margin: clamp(37px, 6vh, 125px) 0 0;
   font-family: var(--font-typewriter);
   font-size: clamp(24px, 3.1vh, 35px);
   line-height: 1.17;
@@ -236,14 +236,14 @@ a {
 .projects-note {
   margin: 0;
   font-family: var(--font-hand);
-  font-size: 32px;
-  letter-spacing: -0.32px;
+  font-size: 24px;
+  letter-spacing: -0.24px;
   line-height: 1.2;
 }
 
 .projects-note--left {
   max-width: var(--page-max);
-  margin: 48px auto 0;
+  margin: 18px auto 0;
   padding: 0 24px;
 }
 
@@ -343,7 +343,7 @@ a {
   .intro__line--4 { margin-left: 36px; }
   .photo__caption {
     right: 0;
-    bottom: -30px;
+    bottom: -35px;
     font-size: 20px;
   }
   .skills {
@@ -364,7 +364,7 @@ a {
     font-size: 26px;
   }
   .projects-note {
-    font-size: 22px;
+    font-size: 18px;
   }
   .projects-note--right {
     font-size: 20px;
@@ -527,7 +527,7 @@ a {
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-size: clamp(15px, 1.6vw, 22px);
+  font-size: clamp(15px, 1.72vw, 22px);
   line-height: 1.35;
   letter-spacing: -0.6px;
   text-align: center;
@@ -626,9 +626,9 @@ a {
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  white-space: nowrap;
+  width: 88%;
   font-family: var(--font-typewriter);
-  font-size: 2.34375cqw;
+  font-size: 1.95cqw;
   line-height: 1.17;
   letter-spacing: -0.03em;
   text-align: center;
@@ -667,7 +667,7 @@ a {
 
 /* tedxie — 7-image bento; description sits below the grid */
 .pcanvas--tedxie .pcanvas__title { top: 5.3281%; }
-.pcanvas--tedxie .pcanvas__marquee { top: 12.9255%; font-size: 1.86cqw; }
+.pcanvas--tedxie .pcanvas__marquee { top: 12.9255%; }
 .pcanvas--tedxie .pcanvas__intro { left: 15.3906%; top: 86.7292%; width: 69.5312%; }
 .tx-i1 { left: -0.0781%; top: 20.1776%; width: 33.5938%; height: 26.2457%; }
 .tx-i2 { left: 33.5156%; top: 20.1776%; width: 33.2031%; height: 26.2457%; }
@@ -679,7 +679,7 @@ a {
 
 /* radisson — a row of three (middle real, sides grey) plus a wide banner */
 .pcanvas--radisson .pcanvas__title { top: 6.8225%; }
-.pcanvas--radisson .pcanvas__marquee { font-size: 1.5cqw; top: 16.5508%; }
+.pcanvas--radisson .pcanvas__marquee { top: 16.5508%; }
 .pcanvas--radisson .pcanvas__intro { left: 16.4062%; top: 25.2685%; width: 69.5312%; }
 /* video sits in the same frame as a photo would */
 .pcanvas__img video {
@@ -706,7 +706,7 @@ a {
 
 /* lets-cook — banner, centred dish with a chicken cut-out, then a pair */
 .pcanvas--letscook .pcanvas__title { top: 3.7975%; }
-.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; font-size: 1.72cqw; }
+.pcanvas--letscook .pcanvas__marquee { top: 9.2124%; }
 .pcanvas--letscook .pcanvas__intro { left: 15.2344%; top: 89.9789%; width: 69.5312%; }
 .lc-banner { left: -0.0781%; top: 14.9437%; width: 100.1562%; height: 27.4262%; }
 .lc-center { left: 25.5469%; top: 43.7412%; width: 73.2031%; height: 18.5654%; }
@@ -716,7 +716,7 @@ a {
 
 /* beefeater — a grey band with a central shot flanked by bottle and jukebox */
 .pcanvas--beefeater .pcanvas__title { top: 5.828%; }
-.pcanvas--beefeater .pcanvas__marquee { font-size: 1.42cqw; top: 15.1183%; }
+.pcanvas--beefeater .pcanvas__marquee { top: 15.1183%; }
 .pcanvas--beefeater .pcanvas__intro { left: 15.2344%; top: 24.3509%; width: 69.5312%; }
 .beef-band { left: 0%; top: 66.9936%; width: 100%; height: 29.5442%; }
 .beef-main { left: 13.75%; top: 41.5465%; width: 74.5312%; height: 30.9866%; }
@@ -728,14 +728,14 @@ a {
 .about-note {
   margin: 0 0 8px;
   font-family: var(--font-serif);
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: clamp(16px, 1.5vw, 21px);
 }
 .about-note--a { text-align: right; margin-top: 48px; }
-.about-note--b { text-align: left; margin-top: 40px; }
+.about-note--b { text-align: left; margin: 0; }
 
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px;
   align-items: stretch;
   margin-top: 24px;
@@ -754,19 +754,41 @@ a {
   display: block;
   aspect-ratio: 4 / 3;
 }
+
+/* these two were cut out at a smaller scale than the rest */
+.about-cell:nth-child(3) img,
+.about-cell:nth-child(6) img { transform: scale(1.35); }
+
+/* the spoon reads oddly upright against the rest */
+.about-cell:nth-child(10) img { transform: rotate(-14deg); }
 .about-cell__num {
   font-family: var(--font-serif);
   font-size: clamp(14px, 1.5vw, 20px);
   line-height: 1;
 }
 
-.about-skills {
+/* the closing question sits under the middle column, the skills to its right */
+.about-footrow {
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 12px 32px;
-  margin-top: 56px;
+  gap: 32px;
+  margin-top: 28px;
+
 }
+
+.about-skills {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "title b"
+    "a     b";
+  align-items: start;
+  gap: 8px 32px;
+  margin-left: auto;
+}
+.about-skills__title  { grid-area: title; }
+.about-skills__list--a { grid-area: a; }
+.about-skills__list--b { grid-area: b; }
 .about-skills__title {
   margin: 0;
   font-family: var(--font-serif);
@@ -782,8 +804,10 @@ a {
 }
 
 @media (max-width: 800px) {
-  .about-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 20px; }
+  .about-grid { grid-template-columns: repeat(3, 1fr); gap: 24px 20px; }
+  .about-footrow { padding-left: 0; flex-wrap: wrap; }
 }
 @media (max-width: 520px) {
   .about-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+  .about-footrow { padding-left: 0; flex-wrap: wrap; }
 }
