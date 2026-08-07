@@ -2,7 +2,7 @@
 :root {
   /* Width is capped by screen height as well as width, so short laptop screens
      get a proportionally smaller layout instead of an oversized one. */
-  --page-max: min(1160px, 94vw, 125vh);
+  --page-max: min(1400px, 92vw, 150vh);
   --color-bg: #ebebe1;
   --color-ink: #000000;
   --color-footer-edge: #f5f5f5;
@@ -49,7 +49,11 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 24px 48px;
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 24px 0;
+  box-sizing: border-box;
   background-color: var(--color-bg);
 }
 
@@ -91,7 +95,7 @@ a {
   font-size: clamp(26px, 3.6vh, 40px);
   line-height: 1.17;
   letter-spacing: -1.2px;
-  margin: clamp(8px, 1.4vh, 20px) 0 clamp(13px, 1.9vh, 17px);
+  margin: clamp(8px, 1.4vh, 20px) 0 clamp(18px, 2.4vh, 22px);
 }
 
 .intro__line {
@@ -152,7 +156,7 @@ a {
 .photo__caption {
   position: absolute;
   right: -70px;
-  bottom: -39px;
+  bottom: -49px;
   font-family: var(--font-hand);
   font-size: 24px;
   letter-spacing: -0.24px;
@@ -162,7 +166,7 @@ a {
 
 /* Skills marquee-style list */
 .skills {
-  margin: clamp(37px, 6vh, 125px) 0 0;
+  margin: clamp(47px, 7vh, 135px) 0 0;
   font-family: var(--font-typewriter);
   font-size: clamp(24px, 3.1vh, 35px);
   line-height: 1.17;
@@ -236,33 +240,33 @@ a {
 .projects-note {
   margin: 0;
   font-family: var(--font-hand);
-  font-size: 24px;
-  letter-spacing: -0.24px;
+  font-size: 20px;
+  letter-spacing: -0.2px;
   line-height: 1.2;
 }
 
 .projects-note--left {
   max-width: var(--page-max);
-  margin: 18px auto 0;
-  padding: 0 24px;
+  margin: 14px auto 0;
+  padding: 0;
 }
 
 .projects-note--right {
   max-width: var(--page-max);
-  margin: 40px auto 0;
-  padding: 0 24px;
-  font-size: 24px;
+  margin: 36px auto 0;
+  padding: 0;
+  font-size: 18px;
   letter-spacing: -0.24px;
   text-align: right;
   transform: rotate(-0.31deg);
 }
 
 .projects-intro {
-  max-width: 890px;
+  max-width: 1000px;
   margin: 32px auto 0;
-  padding: 0 24px;
+  padding: 0;
   font-family: var(--font-serif);
-  font-size: 28px;
+  font-size: 21px;
   line-height: 1.2;
   letter-spacing: -0.28px;
   text-align: center;
@@ -343,7 +347,7 @@ a {
   .intro__line--4 { margin-left: 36px; }
   .photo__caption {
     right: 0;
-    bottom: -35px;
+    bottom: -45px;
     font-size: 20px;
   }
   .skills {
@@ -512,9 +516,9 @@ a {
 }
 
 .pdetail__title {
-  margin: 40px 0 0;
+  margin: 89px 0 0;
   font-family: var(--font-serif);
-  font-size: 32px;
+  font-size: clamp(20px, 1.95vw, 29px);
   line-height: 1.2;
   letter-spacing: -0.32px;
   text-align: center;
@@ -522,22 +526,22 @@ a {
 
 /* Single overflowing line, clipped at the viewport edges as in the design */
 .pdetail__marquee {
-  margin: 68px 0 0;
+  margin: 70px 0 0;
   font-family: var(--font-typewriter);
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  font-size: clamp(15px, 1.72vw, 22px);
+  font-size: clamp(17px, 2.05vw, 27px);
   line-height: 1.35;
   letter-spacing: -0.6px;
   text-align: center;
 }
 
 .pdetail__intro {
-  max-width: 890px;
+  max-width: 782px;
   margin: 70px auto 0;
   font-family: var(--font-serif);
-  font-size: 28px;
+  font-size: clamp(18px, 1.71vw, 25px);
   line-height: 1.2;
   letter-spacing: -0.28px;
   text-align: center;
@@ -628,7 +632,7 @@ a {
   margin: 0;
   width: 88%;
   font-family: var(--font-typewriter);
-  font-size: 1.95cqw;
+  font-size: 2.35cqw;
   line-height: 1.17;
   letter-spacing: -0.03em;
   text-align: center;
@@ -736,9 +740,9 @@ a {
 .about-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  gap: 18px;
   align-items: stretch;
-  margin-top: 24px;
+  margin-top: 29px;
 }
 
 .about-cell {
@@ -751,19 +755,29 @@ a {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: top;      /* content hugs the top of its cell */
+  transform-origin: top center; /* so scaling never pushes it away from its number */
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
 }
 
-/* these two were cut out at a smaller scale than the rest */
-.about-cell:nth-child(3) img,
-.about-cell:nth-child(6) img { transform: scale(1.35); }
-
-/* the spoon reads oddly upright against the rest */
-.about-cell:nth-child(10) img { transform: rotate(-14deg); }
+/* deliberately uneven sizes — a flat grid of identical squares reads as a
+   catalogue, and the cutouts were shot at different scales anyway */
+.about-cell:nth-child(1)  img { transform: scale(0.409); }  /* olives */
+.about-cell:nth-child(2)  img { transform: scale(0.556); }  /* green cocktail */
+.about-cell:nth-child(3)  img { transform: scale(0.575); }  /* peaches */
+.about-cell:nth-child(4)  img { transform: scale(0.8); }  /* figs */
+.about-cell:nth-child(5)  img { transform: scale(0.383); }  /* coffee cup */
+.about-cell:nth-child(6)  img { transform: scale(0.525); }  /* teacup */
+.about-cell:nth-child(7)  img { transform: scale(0.61); }  /* tomatoes */
+.about-cell:nth-child(8)  img { transform: scale(0.62); }  /* berry drink — smaller than the figs */
+.about-cell:nth-child(9)  img { transform: scale(0.814); }  /* napkin */
+.about-cell:nth-child(10) img { transform: translateY(19px) rotate(-14deg) scale(0.635); }  /* spoon */
+.about-cell:nth-child(11) img { transform: scale(0.698); }  /* cheesecake */
+.about-cell:nth-child(12) img { transform: scale(0.59); }  /* pink drink */
 .about-cell__num {
   font-family: var(--font-serif);
-  font-size: clamp(14px, 1.5vw, 20px);
+  font-size: clamp(11px, 1.05vw, 15px);
   line-height: 1;
 }
 
