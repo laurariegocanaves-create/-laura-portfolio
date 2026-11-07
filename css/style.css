@@ -835,3 +835,62 @@ a {
   .about-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
   .about-footrow { padding-left: 0; flex-wrap: wrap; }
 }
+
+/* ---------- Radisson: phone layout ----------
+   On desktop the page is a fixed artboard that scales as one piece. Below
+   700px that shrinks the type to 8–10px, so on phones the artboard is
+   switched off and the same elements stack in reading order instead. */
+.rad-wide-m { display: none; }
+
+@media (max-width: 700px) {
+  .pcanvas--radisson {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 20px 40px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+  .pcanvas--radisson > * {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+  .pcanvas--radisson .pcanvas__title {
+    font-size: 26px;
+  }
+  .pcanvas--radisson .pcanvas__marquee {
+    margin: 4px 0 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+  }
+  .pcanvas--radisson .pcanvas__intro {
+    width: 100%;
+    margin-bottom: 14px;
+    font-size: 17px;
+    line-height: 1.45;
+  }
+  .pcanvas--radisson .rad-i1,
+  .pcanvas--radisson .rad-i2,
+  .pcanvas--radisson .rad-i3 {
+    aspect-ratio: 1 / 1;
+  }
+  .pcanvas--radisson .rad-wide { display: none; }
+  .pcanvas--radisson .rad-wide-m {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .pcanvas--radisson .rad-wide-m img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .pcanvas--radisson .rad-wide-m img:first-child { border-radius: 10px; }
+}
