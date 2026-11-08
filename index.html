@@ -27,7 +27,8 @@
 
   .bar{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;font-size:var(--t13);color:var(--cream);letter-spacing:.04em}
   .bar .links{display:flex;gap:28px}
-  .bar a{color:inherit;text-decoration:none;text-transform:uppercase}
+  .bar a{color:inherit;text-decoration:none;text-transform:uppercase;outline:none;border-bottom:1px solid transparent;transition:border-color .2s}
+  .bar a:hover,.bar a:focus-visible,.bar a.on{border-bottom-color:currentColor}
   .toggles{position:fixed;left:0;right:0;top:50px;z-index:30;text-align:center;font-size:11px;color:var(--cream);letter-spacing:.04em;opacity:.85}
   .toggle{white-space:nowrap}
   .toggle button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;opacity:.5;letter-spacing:.04em}
@@ -158,7 +159,7 @@
 <div class="table"></div>
 <div class="bar">
   <span>Laura Riego Cànaves</span>
-  <div class="links"><a href="#">About</a><a href="#">Projects</a><a href="#">Contact</a></div>
+  <div class="links"><a href="#about" data-nav="about">About</a><a href="#projects" data-nav="projects">Projects</a><a href="#contact" data-nav="contact">Contact</a></div>
 </div>
 <div class="hint" id="hint">SCROLL, SWIPE OR USE THE ARROW KEYS</div>
 <script>if(matchMedia("(max-width: 600px), (pointer: coarse) and (max-width: 900px)").matches)document.getElementById("hint").textContent="SWIPE TO TURN THE PAGE";</script>
@@ -378,6 +379,17 @@ const victims=[[LB,allPages[2]],[RB,allPages[allPages.length-3]]];
   }); requestAnimationFrame(guard); })();
 // safety net: never stay locked if the library is already at rest
 setInterval(()=>{ if(busy && pf.getState()==='read'){ const t=performance.now(); if(!window._stuck) window._stuck=t; else if(t-window._stuck>1200){busy=false; window._stuck=0; setShift(); playOpen();} } else window._stuck=0; },300);
+// top navigation: About = "I'm Laura" spread, Projects = projects index, Contact = last spread before the back cover
+function goSpread(t){ if(busy) return; const sp=spreadOf(pf.getCurrentPageIndex()); if(t===sp||t<0||t>S-1) return;
+  busy=true; pauseAll(); pf.getSettings().flippingTime=650;
+  if(sp===0||sp===S-1){ setTimeout(()=>{layout='full'; fit(); wrap.style.setProperty('--shift','0%');},150); }
+  document.getElementById('hint').style.setProperty('--hint',0);
+  if(Math.abs(t-sp)===1){ busy=false; go(t>sp?1:-1); } else pf.flip(pageOf(t),'bottom'); }
+const NAV={about:()=>1, projects:()=>2, contact:()=>S-2};
+document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); a.blur(); goSpread(NAV[a.dataset.nav]());}));
+function markNav(){const sp=spreadOf(pf.getCurrentPageIndex()); document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',
+  (a.dataset.nav==='about'&&sp===1)||(a.dataset.nav==='projects'&&sp>=2&&sp<S-2)||(a.dataset.nav==='contact'&&sp===S-2)));}
+pf.on('flip',markNav);
 document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',ev=>{ev.stopPropagation(); if(busy) return;
   const fi=projectFace[+el.dataset.go]+(MOBILE?0:1); busy=true; pauseAll(); pf.getSettings().flippingTime=650; pf.flip(fi,'bottom');}));
 // title colour toggle
