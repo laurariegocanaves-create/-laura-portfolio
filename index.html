@@ -1,51 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laura Riego Cànaves — Creative Comms and Marketing Specialist</title>
-  <meta name="description" content="Laura Riego Cànaves — Creative Comms and Marketing Specialist.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Geist+Mono:wght@400;500&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laura Riego Cànaves · riego studio</title>
+<meta name="description" content="Laura Riego Cànaves, Creative Comms and Marketing Specialist. Portfolio of projects in community management, content creation, influencer marketing, events and PR.">
+<meta property="og:title" content="Laura Riego Cànaves · riego studio">
+<meta property="og:description" content="Creative Comms and Marketing Specialist.">
+<meta property="og:image" content="/img/cover-back.webp">
+<script src="js/page-flip.browser.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e8; --cream:#ebebe1; --ink:#161616; --soft:#55554e; --mute:#86867d; --line:#7a4a33;
+    --yellow:#f2c72b; --font:"Bricolage Grotesque",system-ui,sans-serif;
+    /* type scale (1.25): 13 / 16 / 20 / 25 / 39 / 61 */
+    --t13:13px; --t16:16px; --t20:20px; --t25:25px; --t39:39px; --t61:61px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#56542e;color:var(--ink)}
+  body{font-family:var(--font);font-size:var(--t16);overflow:hidden;height:100vh}
+  .table{position:fixed;inset:0;z-index:0;background:
+      repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 7px),
+      radial-gradient(ellipse at 50% 40%,#6d6a3d 0%,#56542e 70%,#4a4827 100%);}
+  .scroller{position:relative;z-index:1}
+
+  .bar{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;font-size:var(--t13);color:var(--cream);letter-spacing:.04em}
+  .bar .links{display:flex;gap:28px}
+  .bar a{color:inherit;text-decoration:none;text-transform:uppercase}
+  .toggles{position:fixed;left:0;right:0;top:50px;z-index:30;text-align:center;font-size:11px;color:var(--cream);letter-spacing:.04em;opacity:.85}
+  .toggle{white-space:nowrap}
+  .toggle button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;opacity:.5;letter-spacing:.04em}
+  .toggle button.on{opacity:1;text-decoration:underline;text-underline-offset:3px}
+  .hint{position:fixed;left:50%;bottom:66px;transform:translateX(-50%);z-index:30;color:var(--cream);font-size:var(--t13);letter-spacing:.14em;opacity:var(--hint,1)}
+
+  .stage{position:fixed;inset:0;z-index:5;overflow:hidden}
+  .wrap{position:absolute;left:50%;top:calc(50% + 10px);width:1100px;height:700px;transform:translate(-50%,-50%) scale(var(--s,1)) translateX(var(--shift,-25%));transform-origin:50% 50%;transition:transform .55s cubic-bezier(.45,.05,.25,1)}
+  #book{width:1100px;height:700px}
+  /* paper: one class on <body class="p-recycled"> picks the stock */
+  body{--pbg:#fbfaf7;--ptex:none;--psize:auto}
+  body.p-cream{--pbg:#f4f1e8;--ptex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");--psize:200px}
+  body.p-laid{--pbg:#f7f5ef;--ptex:repeating-linear-gradient(0deg,rgba(90,80,60,.045) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(90,80,60,.06) 0 1px,transparent 1px 28px);--psize:auto}
+  body.p-linen{--pbg:#f6f3ec;--ptex:repeating-linear-gradient(0deg,rgba(90,80,60,.05) 0 1px,transparent 1px 2px),repeating-linear-gradient(90deg,rgba(90,80,60,.05) 0 1px,transparent 1px 2px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .45  0 0 0 0 .45  0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");--psize:auto,auto,200px}
+  body.p-recycled{--pbg:#f3f1ea;--ptex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.35' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .46  0 0 0 0 .42  0 0 0 22 -16.1'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.32'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .45  0 0 0 0 .45  0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");--psize:260px,200px}
+  .page .pg{position:absolute;inset:0;background-color:var(--pbg);background-image:var(--ptex);background-size:var(--psize);overflow:hidden}
+  /* 3D: pages curve into the spine and catch light on the outer edge */
+  .page .pg::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:6}
+  .page.odd .pg::after{background:linear-gradient(270deg,rgba(0,0,0,.38) 0%,rgba(0,0,0,.24) 1.5%,rgba(0,0,0,.15) 4%,rgba(0,0,0,.09) 7%,rgba(0,0,0,.05) 11%,rgba(0,0,0,.025) 16%,rgba(255,255,255,.08) 22%,rgba(255,255,255,0) 32%,rgba(0,0,0,0) 90%,rgba(0,0,0,.04) 100%)}
+  .page.even .pg::after{background:linear-gradient(90deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.22) 1.5%,rgba(0,0,0,.14) 4%,rgba(0,0,0,.08) 7%,rgba(0,0,0,.045) 11%,rgba(0,0,0,.02) 16%,rgba(255,255,255,.08) 22%,rgba(255,255,255,0) 32%,rgba(0,0,0,0) 90%,rgba(0,0,0,.04) 100%)}
+  .page.blank .pg{background:none!important}
+  .page.blank .pg::after{display:none}
+  .page.cover-page .pg::after{background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,0) 4%,rgba(255,255,255,.06) 6%,rgba(255,255,255,0) 14%)}
+  .page.back-page .pg::after{background:linear-gradient(270deg,rgba(0,0,0,.18),rgba(0,0,0,0) 4%,rgba(255,255,255,.06) 6%,rgba(255,255,255,0) 14%)}
+  /* page-block thickness under the open book */
+  .stack{position:absolute;top:0;width:550px;height:700px;pointer-events:none;z-index:0;transition:transform .5s;
+    background:repeating-linear-gradient(90deg,#e9e6dd 0 1px,#d6d2c7 1px 2px);box-shadow:0 24px 34px -14px rgba(0,0,0,.45)}
+  .stack.l{left:0;transform:translate(calc(var(--wl,0px) * -1),calc(var(--wl,0px) * .5))}
+  .stack.r{left:550px;transform:translate(var(--wr,0px),calc(var(--wr,0px) * .5))}
+  #book{position:relative;z-index:1}
+  .stf__parent{filter:drop-shadow(0 18px 18px rgba(0,0,0,.28)) drop-shadow(0 2px 3px rgba(0,0,0,.25))}
+  .folio{position:absolute;bottom:18px;font-size:11px;color:var(--mute);letter-spacing:.06em}
+  .odd .folio{left:22px}.even .folio{right:22px}
+
+  /* shared text styles: one family, two weights, six sizes */
+  .pad{position:absolute;inset:48px}
+  .label{font-size:var(--t13);color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+  .h{font-weight:800;font-size:var(--t39);line-height:1.02;letter-spacing:-.03em}
+  .sub{font-weight:600;font-size:var(--t16)}
+  .body{font-size:var(--t16);line-height:1.55;color:var(--soft)}
+  .rule{width:28px;height:1px;background:var(--ink);margin:20px 0 14px}
+
+  /* covers */
+  .cover{background-size:cover;background-position:center}
+  .mast{position:absolute;left:0;right:0;top:44px;text-align:center;font-weight:800;font-size:var(--t61);line-height:1;letter-spacing:-.045em;color:var(--mast,var(--yellow))}
+  .barcode{position:absolute;left:30px;bottom:30px;background:#fff;padding:6px 6px 2px;line-height:0}
+  .barcode img{width:110px;height:auto}
+  .bmast{position:absolute;left:30px;top:26px;font-weight:800;font-size:var(--t39);letter-spacing:-.04em;color:var(--yellow)}
+  .bmail{position:absolute;right:28px;bottom:26px;font-size:var(--t13);color:var(--ink);background:rgba(244,241,232,.85);padding:4px 8px}
+
+  /* intro + skills */
+  .skills{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:column;grid-template-rows:repeat(6,auto);column-gap:24px;margin-top:14px}
+  .skills li{display:grid;grid-template-columns:22px 1fr;column-gap:10px;align-items:baseline;font-size:var(--t16);line-height:1.9;color:var(--soft)}
+  .skills li span{text-align:right;font-size:var(--t13);color:var(--mute);font-variant-numeric:tabular-nums}
+
+  /* food collage */
+  .food .item{position:absolute;opacity:0;transform:translateY(18px) rotate(var(--r,0deg));transition:opacity .7s,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+  .food.on .item{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}
+  .food .item img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 6px 8px rgba(0,0,0,.16))}
+  .food .num{position:absolute;width:32px;text-align:center;font-size:var(--t13);color:var(--ink);opacity:0;transition:opacity .5s;transition-delay:calc(var(--d,0s) + .45s)}
+  .food.on .num{opacity:1}
+  .food svg path{transition:stroke-dashoffset .6s;transition-delay:calc(var(--d,0s) + .3s)}
+  .food.on svg path{stroke-dashoffset:0!important}
+  .food svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .food svg path{fill:none;stroke:var(--line);stroke-width:.9;stroke-linecap:round;opacity:.6}
+
+  /* projects index + grid */
+  .plist{list-style:none;margin-top:18px}
+  .plist li{margin-bottom:7px;cursor:pointer}
+  .plist .t{font-size:var(--t13);color:var(--mute);margin-top:2px}
+  .pgrid{position:absolute;left:40px;right:40px;top:40px;bottom:23px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);column-gap:14px;row-gap:14px}
+  .cell{display:flex;flex-direction:column;min-height:0}
+  .cell{cursor:pointer}
+  .cell .ph{flex:1;min-height:0;background:#d9d9d1;overflow:hidden}
+  .cell .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+  .cell:hover .ph img{transform:scale(1.04)}
+  .cell .cap{font-size:var(--t13);margin-top:6px;line-height:1.3;height:2.6em}
+
+  /* project pages */
+  .tags{font-size:var(--t13);color:var(--mute);letter-spacing:.06em;text-transform:uppercase;line-height:1.6;margin:14px 0 22px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;margin-top:28px}
+  .stats b{display:block;font-weight:800;font-size:var(--t39);letter-spacing:-.03em;line-height:1}
+  .stats span{font-size:var(--t13);color:var(--mute)}
+  .media{position:absolute;left:40px;top:40px;width:470px;height:610px}
+  .media .m{position:absolute;background:#dcdad2}
+  .media .m img,.media .m video{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center);display:block}
+  .media .m.contain{background:none}
+  .media .m.contain img,.media .m.contain video{object-fit:contain}
+  .media .canv{position:absolute;overflow:hidden}
+  .media .canv .m{background:none}
+
+  /* numbers */
+  .prices{list-style:none;margin-top:18px}
+  .prices li{display:flex;align-items:baseline;gap:10px;padding:14px 0;font-size:var(--t16)}
+  .prices .dots{flex:1;border-bottom:1px dotted rgba(22,22,22,.45);transform:translateY(-5px)}
+  .prices b{font-weight:800;font-size:var(--t39);letter-spacing:-.03em}
+  .contact{display:flex;gap:24px;margin-top:12px;font-size:var(--t16)}
+  .contact a{color:inherit;text-decoration:none}
+
+  .inv{display:flex;flex-direction:column}
+  .inv-top{display:flex;justify-content:space-between;border-bottom:1px solid rgba(22,22,22,.25);padding-bottom:10px}
+  .inv-h{font-weight:800;font-size:var(--t61);line-height:.98;letter-spacing:-.04em;margin-top:120px}
+  .inv-lede{font-size:var(--t20);line-height:1.45;color:var(--ink);max-width:400px}
+  .inv-list{margin-top:34px;border-top:1px solid rgba(22,22,22,.25)}
+  .inv-list div{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(22,22,22,.25)}
+  .inv-list dt{font-size:var(--t13);color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+  .inv-list dd{font-size:var(--t16)}
+  .inv-list a{color:inherit;text-decoration:none}
+  .inv-foot{margin-top:auto}
+  body.mobile{--t13:17px;--t16:21px;--t20:24px;--t25:28px;--t39:46px;--t61:66px}
+  body.mobile .wrap{width:550px;height:900px;top:calc(50% + 4px)}
+  body.mobile #book{width:550px;height:900px}
+  body.mobile .media{top:150px}
+  body.mobile .food{top:100px!important;bottom:auto!important;height:700px}
+  body.mobile .pgrid{top:60px;bottom:60px}
+  body.mobile .stack{display:none}
+  body.mobile .bar{padding:14px 16px;font-size:11px}
+  body.mobile .bar .links{gap:14px}
+  body.mobile .marquee div{font-size:15px;padding:10px 0}
+  body.mobile .hint{bottom:52px;font-size:11px;white-space:nowrap}
+  .marquee{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--cream);border-top:1px solid rgba(22,22,22,.25);overflow:hidden;white-space:nowrap}
+  .marquee div{display:inline-block;padding:13px 0;font-size:var(--t20);letter-spacing:.02em;animation:roll 50s linear infinite}
+  @keyframes roll{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.marquee div{animation:none}}
+</style>
 </head>
 <body>
-  <header class="nav">
-    <a class="nav__logo" href="index.html">Laura Riego Cànaves</a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+<div class="table"></div>
+<div class="bar">
+  <span>Laura Riego Cànaves</span>
+  <div class="links"><a href="#">About</a><a href="#">Projects</a><a href="#">Contact</a></div>
+</div>
+<div class="hint" id="hint">SCROLL, SWIPE OR USE THE ARROW KEYS</div>
+<script>if(matchMedia("(max-width: 600px), (pointer: coarse) and (max-width: 900px)").matches)document.getElementById("hint").textContent="SWIPE TO TURN THE PAGE";</script>
+<div class="stage"><div class="wrap" id="wrap"><div class="stack l" id="stackL"></div><div class="stack r" id="stackR"></div><div id="book"></div></div></div>
+<div class="marquee"><div id="mq"></div></div>
 
-  <main class="hero">
-    <div class="intro">
-      <p class="intro__line intro__line--1">Hi:)</p>
-      <p class="intro__line intro__line--2">I&rsquo;m <span class="intro__circled">Laura<img class="intro__ellipse" src="images/ellipse.png" alt=""></span>, Creative</p>
-      <p class="intro__line intro__line--3">Comms and Marketing</p>
-      <p class="intro__line intro__line--4">Specialist</p>
-    </div>
+<script>
+const SK=['Curious','Open-minded','Adaptable','Committed','Collaborative','Creative thinker','Easy going','Reliable','Problem solver','Critical thinker','Active listener','Fast learner'];
+const V=(src,poster)=>({v:src,poster});
+const PROJECTS=[
+ {name:'Radisson Hotels Group',thumb:'img/grid-patio.webp',tags:'PR · Influencer marketing · Email marketing · Marketing and communications · Seasonal promotional strategies',
+  text:'Managed the end-to-end press release process for Radisson Hotel Group, overseeing design, layout, asset distribution, and coordination with media and agencies across Europe, Asia Pacific, the Middle East, and Africa. Developed influencer campaign strategies, managed creator partnerships and the Creator Hub programme, and supported international press trips while tracking media coverage, campaign performance, and earned media value to strengthen global brand visibility.',
+  rows:[[{v:'video/radisson-2.mp4',poster:'img/p/radisson-video-2-poster.webp',ar:1016/640}],
+        [{i:'img/p/radisson-2.webp',ar:606/762},{v:'video/radisson-3.mp4',poster:'img/p/radisson-video-3-poster.webp',ar:612/720}],
+        [{i:'img/p/radisson-wide.webp',ar:1662/413}]]},
+ {name:'Spotlight Comunicación',thumb:'img/grid-food.webp',tags:'Community management · Content creation · Influencer marketing · Media outreach · Events · Communication strategy · Shootings',
+  text:'Managed digital marketing and community management for 15+ luxury hospitality brands, creating content, supporting photoshoots, coordinating campaigns and influencer activations, and overseeing social media production. Managed the agency’s Instagram and website, increasing followers by 30% and engagement by 25%, while supporting over 30 creator collaborations and tracking campaign performance.',
+  stats:[['15+','luxury hospitality brands'],['30+','creator collaborations'],['30%','increase in followers'],['25%','increase in engagement']],
+  tiles:{cols:3,ar:0.8},rows:[[{v:'video/spotlight-1.mp4',poster:'img/p/spotlight-video-1-poster.webp',ar:722/900},{v:'video/spotlight-2.mp4',poster:'img/p/spotlight-video-2-poster.webp',ar:642/900},{i:'img/p/spotlight-3.webp',ar:1179/1434}],
+        [{i:'img/p/spotlight-4.webp',ar:1179/1474},{v:'video/spotlight-3.mp4',poster:'img/p/spotlight-video-3-poster.webp',ar:724/900},{i:'img/p/spotlight-6.webp',ar:1179/1437}]]},
+ {name:'TEDxIE Madrid',thumb:'img/grid-tedx.webp',tags:'Team management · Social media · Content creation · Event creation & set up · Merchandising',
+  text:'Led the creative direction for TEDxIE Madrid by developing branding, digital campaigns, and promotional content. Designed merchandise, managed event communications and content creation, contributed to speaker selection, and oversaw the live event setup and content capture to deliver a cohesive and engaging brand experience.',
+  stats:[['400+','attendees'],['5','team members led']],
+  rows:[[{i:'img/p/tedxie-1.webp',ar:1080/1350},{i:'img/p/tedxie-2.webp',ar:2000/1332}],
+        [{i:'img/p/tedxie-3.webp',ar:1080/1350},{i:'img/p/tedxie-4.webp',ar:2000/1332}],
+        [{i:'img/p/tedxie-5.webp',ar:2000/1332},{i:'img/p/tedxie-6.webp',ar:2000/1333},{i:'img/p/tedxie-7.webp',ar:2000/1332}]]},
+ {name:'Tails.com',thumb:'img/grid-tails.webp',tags:'Community management · Social media · Content creation · Influencer marketing · Reporting · Illustration',
+  text:'Managed community management for the Tails.com social media accounts, alongside creating content for stories and posts, including Pet of the Week features and personalised pet illustrations. Ran the brand’s Facebook group community, creating content and engaging with members, while coordinating influencer partnerships and preparing performance reports to track engagement and campaign results.',
+  rows:[[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',ar:720/900},{i:'img/p/tails-zara.webp',ar:707/1000}],
+        [{i:'img/p/tails-petweek.webp',ar:1000/510}]]},
+ {name:'Coffee Book',thumb:'img/grid-coffeebook.webp',full:'img/p/coffeebook-full.webp',tags:'Market research · Branding · Visual identity · UI design · UX design · App design',
+  text:'Conducted market research and created the branding and UI/UX design for Coffee Book’s ordering app, giving the café’s customers an easy way to browse the full menu, discover the latest offers and place orders in a few taps. Designed the app’s visual language, mapped the user journey from menu to checkout, and crafted an interface that feels intuitive, warm and true to the café.',rows:[[{ar:1},{ar:1}],[{ar:2.05}]]},
+ {name:'Beefeater Gin & Lemon',thumb:'img/grid-gin.webp',tags:'Launch strategy · Owned, paid and earned media · Influencer marketing · Email marketing · Customer experience',
+  text:'Developed the launch strategy for Beefeater Lemon in Spain, creating a campaign targeting a young, trend-conscious audience. Designed concepts for an interactive website, influencer collaborations, Spotify playlists, supermarket activations, social media content, and paid and owned media campaigns to increase brand awareness and drive engagement.',
+  rows:[[{i:'img/p/beefeater-left.webp',ar:543/884,contain:1},{i:'img/p/beefeater-main.webp',ar:900/778,contain:1},{i:'img/p/beefeater-right.webp',ar:447/900,contain:1}],
+        [{v:'video/beefeater-oep.mp4',poster:'img/p/beefeater-video-poster.webp',ar:1280/720}]]},
+ {name:'Mango',thumb:'img/grid-field.webp',tags:'Crisis communication strategy · KOLs · PR · Partnerships',
+  text:'Developed a corporate communication strategy for Mango across the UK, France, and Turkey to strengthen media engagement, brand visibility, and crisis preparedness. Conducted market research, identified communication challenges, and designed localized strategies including media relations, ambassador initiatives, academic and corporate partnerships, and a proactive crisis communication framework to enhance brand credibility and stakeholder trust.',
+  canvas:{ar:1280/1198,items:[
+    {i:'img/p/mango-1.webp',x:-1.72,y:38.65,w:119.69,h:56.34,pos:'top'},
+    {i:'img/p/mango-2.webp',x:-18.05,y:0.42,w:90.63,h:54.42,contain:1},
+    {i:'img/p/mango-3.webp',x:67.27,y:0,w:32.58,h:100}]}},
+ {name:'Let’s Cook',thumb:'img/grid-cocktail.webp',tags:'Brand strategy · Events · Customer experience · Website and merchandising design · Advertising',
+  text:'Developed a brand strategy to increase awareness and engagement for the culinary platform “Let’s Cook”. Redesigned the website, ingredient boxes, and overall user experience, designed merchandising, created concepts for events and brand collaborations, and developed advertising and communication materials to strengthen brand visibility, spark interest, and foster a more engaged community.',
+  rows:[[{i:'img/p/letscook-banner.webp',ar:2000/1333}],
+        [{i:'img/p/letscook-chicken.webp',ar:1587/2245},{i:'img/p/letscook-center.webp',ar:1672/941}],
+        [{i:'img/p/letscook-l.webp',ar:2000/1414},{i:'img/p/letscook-r.webp',ar:2000/1414}]]},
+ {name:'Illustrations',thumb:'img/grid-illustrations.webp',tags:'Digital illustration · Hand drawing · Character design · Personal work',
+  text:'A collection of my more personal, creative work. From digital illustration to hand-drawn pieces, it moves between different styles, subjects and techniques, and is where I explore ideas outside of client briefs.',
+  tiles:{cols:2,ar:0.77},rows:[[{i:'img/p/illustrations.webp',ar:1080/1440},{i:'img/p/illu-walk.webp',ar:1080/1350}],
+        [{i:'img/p/illu-cat.webp',ar:1036/1382},{i:'img/p/illu-dog.webp',ar:1036/1382}]]}
+];
+const MW=470, MH=610, GAP=10;
+function mediaEl(m,style,cls=''){if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
+  :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
+function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
+  const sumAr=rows.map(r=>r.reduce((a,m)=>a+m.ar,0));
+  const heightAt=W=>rows.reduce((t,r,i)=>t+(W-GAP*(r.length-1))/sumAr[i],0)+GAP*(rows.length-1);
+  let W=MW; if(heightAt(W)>MH){let lo=50,hi=MW;for(let i=0;i<40;i++){const m=(lo+hi)/2;heightAt(m)>MH?hi=m:lo=m;}W=lo;}
+  const x0=(MW-W)/2; let y=(MH-heightAt(W))/2, out='';
+  rows.forEach((r,ri)=>{const h=(W-GAP*(r.length-1))/sumAr[ri]; let x=x0;
+    r.forEach((m,j)=>{const w=j===r.length-1? x0+W-x : m.ar*h; out+=mediaEl(m,`left:${x}px;top:${y}px;width:${w}px;height:${h}px`); x+=w+GAP;}); y+=h+GAP;});
+  return out;}
+function tiles(t,items){ // equal boxes, each picture fitted whole inside
+  const w=(MW-GAP*(t.cols-1))/t.cols, h=w/t.ar, n=Math.ceil(items.length/t.cols), H=n*h+GAP*(n-1); let out='';
+  items.forEach((m,i)=>{const x=(i%t.cols)*(w+GAP), y=(MH-H)/2+Math.floor(i/t.cols)*(h+GAP);
+    out+=mediaEl({...m,contain:0},`left:${x}px;top:${y}px;width:${w}px;height:${h}px`);});
+  return out;}
+function canvas(c){ // original page compositions, scaled into the page
+  let w=MW, h=w/c.ar; if(h>MH){h=MH;w=h*c.ar;}
+  const ox=(MW-w)/2, oy=(MH-h)/2;
+  return `<div class="canv" style="left:${ox}px;top:${oy}px;width:${w}px;height:${h}px">${c.items.map(m=>
+    mediaEl(m,`left:${m.x}%;top:${m.y}%;width:${m.w}%;height:${m.h}%;${m.scale?`transform:scale(${m.scale});`:''}${m.pos?`--pos:${m.pos};`:''}`,m.contain?'contain':'')).join('')}</div>`;}
+const pad2=n=>String(n).padStart(2,'0');
+const F={
+ cover:()=>`<div class="cover" style="position:absolute;inset:0;background-image:url(img/cover-back.webp);filter:saturate(.8)"></div>
+   <h1 class="mast">riego studio</h1><div class="barcode"><img src="img/barcode.svg" alt=""></div>`,
+ intro:()=>`<div class="pad"><p class="label">Hi:)</p><h2 class="h" style="margin-top:10px">I’m Laura,</h2><div class="rule"></div>
+   <p class="label" style="color:var(--ink)">Creative Comms and Marketing Specialist</p>
+   <p class="label" style="margin-top:150px">(I) My skills</p><ol class="skills">${SK.map((s,i)=>`<li><span>${i+1}</span>${s}</li>`).join('')}</ol></div>`,
+ food:()=>`<div class="food" id="food" style="position:absolute;inset:0"><svg viewBox="0 0 550 700" id="fsvg"></svg></div>`,
+ pindex:()=>`<div class="pad"><p class="label">(II)</p><h2 class="h" style="margin-top:10px">Projects</h2>
+   <p class="body" style="margin-top:16px">From branding and digital marketing to events and creative campaigns, these projects reflect the way I like to work: combining strategy with creativity to build experiences that people genuinely connect with.</p>
+   <ol class="plist">${PROJECTS.map((p,i)=>`<li data-go="${i}"><span class="sub">${i+1} ${p.name}</span><div class="t">${p.ph?'&nbsp;':p.tags.split(' · ').slice(0,3).join(' · ')}</div></li>`).join('')}</ol></div>`,
+ pgrid:()=>`<div class="pgrid">${PROJECTS.map((p,i)=>`<div class="cell" data-go="${i}"><div class="ph">${p.thumb?`<img src="${p.thumb}" alt="">`:''}</div><div class="cap">(${i+1}) ${p.name}</div></div>`).join('')}</div>`,
+ ptext:(p,i)=>`<div class="pad"><p class="label">(${pad2(i+1)})</p><h2 class="h" style="margin-top:10px">${p.name}</h2><p class="tags">${p.tags}</p>
+   <p class="body">${p.ph?`<span class="label">${p.thumb&&!p.noMedia?'Text to come':'Pictures and text to come'}</span>`:p.text}</p>${p.stats?`<div class="stats">${p.stats.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>`:''}</div>`,
+ pmedia:(p)=>p.full?`<div style="position:absolute;inset:0;background:url(${p.full}) center/cover"></div>`:`<div class="media">${p.canvas?canvas(p.canvas):p.tiles?tiles(p.tiles,p.rows.flat()):justify(p.rows)}</div>`,
+ numbers:()=>`<div class="pad"><p class="label">(III)</p><h2 class="h" style="margin-top:10px">In numbers</h2><ul class="prices">
+   <li>Luxury hospitality brands<span class="dots"></span><b>15+</b></li><li>Creator collaborations<span class="dots"></span><b>60+</b></li><li>Brands worked with<span class="dots"></span><b>20+</b></li></ul></div>`,
+ contact:()=>`<div class="pad" style="display:flex;flex-direction:column;justify-content:center"><p class="label">(Contact)</p>
+   <div class="contact"><a href="mailto:laura.riegocanaves@gmail.com">laura.riegocanaves@gmail.com</a><a href="https://www.linkedin.com/in/laura-riego-canaves/">LINKEDIN</a></div></div>`,
+ letter:()=>`<div style="position:absolute;inset:0;background:url(img/p/receipts.webp) center/cover"></div>`,
+ invite:()=>`<div class="pad inv">
+   <div class="inv-top"><span class="label">(Contact)</span><span class="label">riego studio</span></div>
+   <h2 class="inv-h">Pull up<br>a chair.</h2>
+   <div class="rule"></div>
+   <p class="inv-lede">Have an idea you’d like to talk through, or want to know more about me and my work? Let’s sit down and chat it over.</p>
+   <dl class="inv-list">
+     <div><dt>Email</dt><dd><a href="mailto:laura.riegocanaves@gmail.com">laura.riegocanaves@gmail.com</a></dd></div>
+     <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/laura-riego-canaves/">Laura Riego Cànaves ↗</a></dd></div>
+   </dl>
+   <p class="inv-foot label">New projects · Collaborations · Or just to say hello</p></div>`,
+ back:()=>`<div class="cover" style="position:absolute;inset:0;background-image:url(img/cover-front.webp);filter:saturate(.75)"></div>
+   <p class="bmast">riego studio</p>`
+};
+// faces in reading order
+const faces=[F.cover(),F.intro(),F.food(),F.pindex(),F.pgrid()];
+const projectFace=[];
+PROJECTS.forEach((p,i)=>{projectFace.push(faces.length);faces.push(F.ptext(p,i));faces.push(F.pmedia(p));});
+faces.push(F.letter(),F.invite(),F.back());
+const TOTAL=faces.length, book=document.getElementById('book');
+const MOBILE=false; // single-page phone mode switched off: Laura wants the two-page magazine everywhere for now
+if(MOBILE) document.body.classList.add('mobile');
+const blank=()=>{const d=document.createElement('div'); d.className='page blank'; d.dataset.density='soft'; d.innerHTML='<div class="pg"></div>'; return d;};
+if(!MOBILE) book.appendChild(blank());
+faces.forEach((html,i)=>{const d=document.createElement('div'); const hard=i===0||i===TOTAL-1;
+  d.className='page '+(i%2?'odd':'even')+(i===0?' cover-page':'')+(i===TOTAL-1?' back-page':''); d.dataset.density='soft';
+  d.innerHTML=`<div class="pg">${html}${i>0&&i<TOTAL-1?`<span class="folio">${pad2(i)}</span>`:''}</div>`; book.appendChild(d);});
+if(!MOBILE) book.appendChild(blank());
+const S=MOBILE?TOTAL:TOTAL/2+1; // spreads incl. closed covers (blank pages either side keep the covers soft)
 
-    <figure class="photo">
-      <img class="photo__clamp" src="images/clamp.png" alt="">
-      <img class="photo__img" src="images/laura.jpg" alt="Laura sitting on a bench wearing sunglasses">
-      <figcaption class="photo__caption">Stay curious</figcaption>
-    </figure>
+document.getElementById('mq').textContent='COMMUNITY MANAGEMENT · SOCIAL MEDIA · CONTENT CREATION · INFLUENCER MARKETING · EVENTS · PR · COMMUNICATIONS · STRATEGY · MOODBOARDS · WEB DESIGN · '.repeat(4);
 
-    <p class="skills">
-      <span>COMMUNITY MANAGEMENT &middot; SOCIAL MEDIA &middot; CONTENT CREATION</span>
-      <span>INFLUENCER MARKETING &middot; EVENTS &middot; PR &middot; COMMUNICATIONS</span>
-      <span>STRATEGY &middot; MOODBOARDS &middot; WEB DESIGN</span>
-    </p>
-  </main>
+// food collage: equal padding to all four page edges, free placement inside
+const FOOD=[[12,40,58,105,105, 70,205,0],[3,188,36,150,150, 300,214,0],[2,404,68,95,95, 452,192,0],
+  [4,36,248,130,130, 186,392,0],[11,226,246,120,120, 330,392,0],[10,394,226,26,132, 362,206,-12],[5,446,300,80,80, 500,404,0],
+  [1,46,456,112,112, 186,488,0],[7,218,448,122,122, 284,604,0],[8,426,440,90,90, 384,470,0],
+  [9,56,604,82,82, 168,664,-6],[6,426,584,96,96, 382,664,0]];
+const K=0.82, PAD=56, W=550, H=700;
+const els=FOOD.map(([n,x,y,w,h,lx,ly,r])=>({n,cx:x+w/2,cy:y+h/2,w:w*K,h:h*K,lx,ly,r}));
+function fitAxis(get,size,inner){ // find scale s on centres so extent fits inner exactly
+  const ext=s=>{let mn=1e9,mx=-1e9;els.forEach(e=>{const [c,half,lc]=get(e);mn=Math.min(mn,s*c-half,s*lc-12);mx=Math.max(mx,s*c+half,s*lc+12);});return [mn,mx];};
+  let lo=0.3,hi=3;for(let i=0;i<40;i++){const m=(lo+hi)/2;const [a,b]=ext(m);(b-a>inner?hi=m:lo=m);}
+  const s=(lo+hi)/2,[a]=ext(s);return v=>PAD+(s*v-a);
+}
+const mx=fitAxis(e=>[e.cx,e.w/2,e.lx],W,W-2*PAD), my=fitAxis(e=>[e.cy,e.h/2,e.ly],H,H-2*PAD);
+const food=document.getElementById('food'), fsvg=document.getElementById('fsvg'); const foodEls=[];
+els.forEach(e=>{
+  const cx=mx(e.cx), cy=my(e.cy), lx=mx(e.lx), ly=my(e.ly);
+  const it=document.createElement('div'); it.className='item';
+  const dl=(foodEls.length*0.07).toFixed(2)+'s'; it.style.cssText=`left:${cx-e.w/2}px;top:${cy-e.h/2}px;width:${e.w}px;height:${e.h}px;--r:${e.r}deg;--d:${dl}`;
+  it.innerHTML=`<img src="img/food-${e.n}.webp" alt="">`; food.appendChild(it);
+  const lab=document.createElement('div'); lab.className='num'; lab.textContent=`(${e.n})`; lab.style.setProperty('--d',dl); lab.style.left=(lx-16)+'px'; lab.style.top=(ly-9)+'px'; food.appendChild(lab);
+  // soft curve from under the dish (so it always touches it) to the edge of its number
+  const dx=lx-cx, dy=ly-cy, d=Math.hypot(dx,dy), ux=dx/d, uy=dy/d;
+  const te=Math.min(17/Math.max(Math.abs(ux),1e-3), 10/Math.max(Math.abs(uy),1e-3))+1;
+  const ex=lx-ux*te, ey=ly-uy*te, mxp=(cx+ex)/2, myp=(cy+ey)/2, bend=Math.min(14,d*0.12);
+  const L=document.createElementNS('http://www.w3.org/2000/svg','path');
+  L.setAttribute('d',`M${cx},${cy} Q${mxp-uy*bend},${myp+ux*bend} ${ex},${ey}`); fsvg.appendChild(L);
+  const len=L.getTotalLength(); L.style.setProperty('--d',dl); L.style.strokeDasharray=len; L.style.strokeDashoffset=len;
+  foodEls.push({it,lab,L,len});
+});
 
-  <footer class="footer" id="contact">
-    <p class="footer__content">
-      <a href="mailto:laura.riegocanaves@gmail.com">laura.riegocanaves@gmail.com</a>
-      <a href="https://www.linkedin.com/in/laura-riego-canaves/" target="_blank" rel="noopener">LINKEDIN</a>
-    </p>
-  </footer>
+// real page curl (StPageFlip), driven by scroll one spread at a time
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const wrap=document.getElementById('wrap');
+let layout='centred';
+function fit(){ if(MOBILE){ const sc=Math.min((innerWidth-28)/550,(innerHeight-140)/900); wrap.style.setProperty('--s',sc.toFixed(3)); return; } const k=layout==='centred'?0.68:1; const sc=Math.min((innerWidth-(layout==='centred'?0:80))*k/1100,(innerHeight-150)*k/700,1.15); wrap.style.setProperty('--s',sc.toFixed(3));}
+const pf=new St.PageFlip(book,{width:550,height:MOBILE?900:700,size:'fixed',showCover:false,usePortrait:MOBILE,useMouseEvents:!MOBILE,drawShadow:true,maxShadowOpacity:.6,
+  flippingTime:650,mobileScrollSupport:false,disableFlipByClick:true,showPageCorners:true,startZIndex:2});
+pf.loadFromHTML(document.querySelectorAll('#book .page'));
+const spreadOf=i=>MOBILE?i:Math.floor(i/2); // library index (blank page at 0)
+const pageOf=s=>MOBILE?s:2*s;
+let busy=false;
+const pages=[...document.querySelectorAll('#book .page')];
+function setShift(){const pi=pf.getCurrentPageIndex(), sp=spreadOf(pi);
+  if(MOBILE){ wrap.style.setProperty('--shift','0%'); document.getElementById('food').classList.toggle('on',pi===2); return; }
+  wrap.style.setProperty('--shift',sp===0?'-25%':sp===S-1?'25%':'0%');
+  const frac=pi/(pages.length-2);
+  wrap.style.setProperty('--wl',(sp===0?0:2+7*frac).toFixed(1)+'px'); wrap.style.setProperty('--wr',(sp===S-1?0:2+7*(1-frac)).toFixed(1)+'px');
+  const closed=sp===0||sp===S-1; const want=closed?'centred':'full'; if(layout!==want){layout=want; fit();} document.getElementById('stackL').style.opacity=closed?0:1; document.getElementById('stackR').style.opacity=closed?0:1;
+  document.getElementById('food').classList.toggle('on',sp===1);}
+// videos: everything paused while pages move; only the open spread plays once it has landed
+function pauseAll(){document.querySelectorAll('#book video').forEach(v=>{if(!v.paused)v.pause();});}
+function playOpen(){const pi=pf.getCurrentPageIndex();
+  pages.forEach((pg,i)=>pg.querySelectorAll('video').forEach(v=>{ if(i===pi||(!MOBILE&&i===pi+1)){ if(v.preload!=='auto'){v.preload='auto';} v.play().catch(()=>{}); } else if(!v.paused) v.pause(); }));
+  // warm up the next spread's videos so they start instantly
+  [pi+2,pi+3].forEach(i=>pages[i]&&pages[i].querySelectorAll('video').forEach(v=>{if(v.preload==='none'){v.preload='metadata';v.load();}}));}
+function go(dir,fast){ if(busy) return false; const sp=spreadOf(pf.getCurrentPageIndex()), t=sp+dir; if(t<0||t>S-1) return false;
+  busy=true; pauseAll(); pf.getSettings().flippingTime=fast?450:650;
+  // closing the magazine: the page printed on the back of the cover lifts away with it, and the page-block disappears
+  if(!MOBILE&&(t===0||t===S-1)){     document.getElementById('stackL').style.opacity=0; document.getElementById('stackR').style.opacity=0;
+    setTimeout(()=>{wrap.style.setProperty('--shift',t===0?'-25%':'25%'); layout='centred'; fit();},250); }
+  if(!MOBILE&&(sp===0||sp===S-1)){ setTimeout(()=>{layout='full'; fit(); wrap.style.setProperty('--shift','0%');},150); }
+  dir>0?pf.flipNext('bottom'):pf.flipPrev('bottom');
+  document.getElementById('hint').style.setProperty('--hint',0); return true;}
+pf.on('changeState',e=>{ if(e.data==='read'){busy=false; setShift(); if(queued){const q=queued; queued-=Math.sign(q); setTimeout(()=>{ if(!go(Math.sign(q),true)) {queued=0; playOpen();} },0); return;} playOpen();} else {busy=true; pauseAll();} });
+pf.on('flip',setShift);
+// one page per scroll gesture: trackpad momentum after a turn is ignored; a fresh push turns the next page
+let acc=0, locked=false, idleT, last=0, lastFlipAt=0, lastEvt=0, queued=0;
+addEventListener('wheel',e=>{ e.preventDefault(); const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX, a=Math.abs(d), now=performance.now();
+  const gap=now-lastEvt; lastEvt=now;
+  // a separate mouse-wheel click (big delta after a pause) always counts, even mid-turn: it queues the next page
+  if(a>=50 && gap>40 && locked){ if(busy){ if(queued<4) queued+=Math.sign(d)>0?1:-1; } else { go(Math.sign(d)); lastFlipAt=now; } return; }
+  clearTimeout(idleT); idleT=setTimeout(()=>{locked=false;acc=0;last=0;},180);
+  if(locked){ if(!busy && now-lastFlipAt>350 && a>last*1.6+6){locked=false;acc=0;} else {last=a; return;} }
+  last=a; acc+=d;
+  if(Math.abs(acc)>=40){ if(go(Math.sign(acc))){locked=true; lastFlipAt=now;} acc=0; } },{passive:false});
+addEventListener('keydown',e=>{ if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(1);} if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(-1);} });
+let tx=0,ty=0; addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty; if(Math.max(Math.abs(dx),Math.abs(dy))<40)return; go((Math.abs(dy)>Math.abs(dx)?dy:dx)<0?1:-1);},{passive:true});
+addEventListener('resize',fit);
+// The blank pages either side of the covers are transparent (so the table shows). When the library reveals one,
+// the page underneath would show through, so we clip that page to the exact opposite of the reveal, every frame.
+const allPages=[...document.querySelectorAll('#book .page')], LB=allPages[0], RB=allPages[allPages.length-1];
+const victims=[[LB,allPages[2]],[RB,allPages[allPages.length-3]]];
+(function guard(){ if(MOBILE) return; victims.forEach(([blank,under])=>{ if(!under) return;
+    const cp=blank.style.clipPath, m=cp&&cp.match(/polygon\((.*)\)/);
+    if(m && blank.style.display!=='none' && /translate3d/.test(blank.style.transform)){
+      const pts=m[1].split(',').map(q=>q.trim().split(/\s+/).map(parseFloat));
+      const tr=blank.style.transform.match(/translate3d\(([-\d.e]+)px,\s*([-\d.e]+)px/), ang=(blank.style.transform.match(/rotate\(([-\d.e]+)rad/)||[0,0])[1]*1;
+      const tx=tr?+tr[1]:0, ty=tr?+tr[2]:0, ox=parseFloat(blank.style.left)||0, ux=parseFloat(under.style.left)||0, c=Math.cos(ang), sn=Math.sin(ang);
+      const w=pts.map(([x,y])=>[ox+tx+x*c-y*sn-ux, ty+x*sn+y*c]);
+      under.style.clipPath=`path(evenodd, "M-5 -5 H560 V705 H-5 Z M${w.map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' L')} Z")`;
+    } else if(under.style.clipPath && under.style.clipPath.startsWith('path')) under.style.clipPath='';
+  }); requestAnimationFrame(guard); })();
+// safety net: never stay locked if the library is already at rest
+setInterval(()=>{ if(busy && pf.getState()==='read'){ const t=performance.now(); if(!window._stuck) window._stuck=t; else if(t-window._stuck>1200){busy=false; window._stuck=0; setShift(); playOpen();} } else window._stuck=0; },300);
+document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',ev=>{ev.stopPropagation(); if(busy) return;
+  const fi=projectFace[+el.dataset.go]+(MOBILE?0:1); busy=true; pauseAll(); pf.getSettings().flippingTime=650; pf.flip(fi,'bottom');}));
+// title colour toggle
+
+
+
+fit();setShift();
+</script>
 </body>
 </html>
