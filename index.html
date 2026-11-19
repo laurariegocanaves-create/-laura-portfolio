@@ -182,7 +182,7 @@ const PROJECTS=[
  {name:'Spotlight Comunicación',thumb:'img/grid-food.webp',tags:'Community management · Content creation · Influencer marketing · Media outreach · Events · Communication strategy · Shootings',
   text:'Managed digital marketing and community management for 15+ luxury hospitality brands, creating content, supporting photoshoots, coordinating campaigns and influencer activations, and overseeing social media production. Managed the agency’s Instagram and website, increasing followers by 30% and engagement by 25%, while supporting over 30 creator collaborations and tracking campaign performance.',
   stats:[['15+','luxury hospitality brands'],['30+','creator collaborations'],['30%','increase in followers'],['25%','increase in engagement']],
-  tiles:{cols:3,ar:0.8},rows:[[{v:'video/spotlight-1.mp4',poster:'img/p/spotlight-video-1-poster.webp',ar:722/900},{v:'video/spotlight-2.mp4',poster:'img/p/spotlight-video-2-poster.webp',ar:642/900},{i:'img/p/spotlight-3.webp',ar:1179/1434}],
+  tiles:{cols:3,ar:0.8},rows:[[{v:'video/spotlight-1.mp4',poster:'img/p/spotlight-video-1-poster.webp',ar:722/900},{v:'video/spotlight-2.mp4',poster:'img/p/spotlight-video-2-poster.webp',ar:642/900,pos:'50% 20%'},{i:'img/p/spotlight-3.webp',ar:1179/1434}],
         [{i:'img/p/spotlight-4.webp',ar:1179/1474},{v:'video/spotlight-3.mp4',poster:'img/p/spotlight-video-3-poster.webp',ar:724/900},{i:'img/p/spotlight-6.webp',ar:1179/1437}]]},
  {name:'TEDxIE Madrid',thumb:'img/grid-tedx.webp',tags:'Team management · Social media · Content creation · Event creation & set up · Merchandising',
   text:'Led the creative direction for TEDxIE Madrid by developing branding, digital campaigns, and promotional content. Designed merchandise, managed event communications and content creation, contributed to speaker selection, and oversaw the live event setup and content capture to deliver a cohesive and engaging brand experience.',
@@ -238,7 +238,7 @@ function justify(rows){ // whole images, no cropping; every row exactly the same
 function tiles(t,items){ // equal boxes, each picture fitted whole inside
   const w=(MW-GAP*(t.cols-1))/t.cols, h=w/t.ar, n=Math.ceil(items.length/t.cols), H=n*h+GAP*(n-1); let out='';
   items.forEach((m,i)=>{const x=(i%t.cols)*(w+GAP), y=(MH-H)/2+Math.floor(i/t.cols)*(h+GAP);
-    out+=mediaEl({...m,contain:0},`left:${x}px;top:${y}px;width:${w}px;height:${h}px`);});
+    out+=mediaEl({...m,contain:0},`left:${x}px;top:${y}px;width:${w}px;height:${h}px;${m.pos?`--pos:${m.pos};`:""}`);});
   return out;}
 function canvas(c){ // original page compositions, scaled into the page
   let w=MW, h=w/c.ar; if(h>MH){h=MH;w=h*c.ar;}
