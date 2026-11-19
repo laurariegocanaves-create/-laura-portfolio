@@ -127,6 +127,13 @@
   .tph-bars i.on b{animation:tphfill 2.3s linear forwards}
   @keyframes tphfill{to{width:100%}}
   .tph-reply{position:absolute;left:9px;right:9px;bottom:3.5%;height:20px;border:1px solid rgba(255,255,255,.4);border-radius:99px;color:rgba(255,255,255,.75);font-size:7px;line-height:18px;padding-left:10px;letter-spacing:.02em}
+  .tph-scr.igp{background:#fff;padding-top:9%;font-family:-apple-system,Helvetica,Arial,sans-serif;color:#111}
+  .igp-top{display:flex;align-items:center;gap:4px;padding:0 7px 4px}.igp-top svg{width:9px;height:9px}.igp-top b{flex:1;font-size:8.5px;font-weight:700;letter-spacing:-.01em;font-style:italic}
+  .igp-user{display:flex;align-items:center;gap:4px;padding:3px 6px}.igp-user i{width:11px;height:11px;border-radius:50%;background:#1a4b9c;box-shadow:0 0 0 1px #fff,0 0 0 2px #e1306c}.igp-user b{flex:1;font-size:6.5px}.igp-user span{font-size:6px;color:#555}
+  .igp-media{width:100%;aspect-ratio:4/5;background:#eee;overflow:hidden}.igp-media video{width:100%;height:100%;object-fit:cover;display:block}
+  .igp-act{display:flex;align-items:center;gap:5px;padding:5px 6px 3px}.igp-act svg{width:10px;height:10px}.igp-act svg:last-child{margin-left:auto}
+  .igp-dots{flex:1;display:flex;justify-content:center;gap:2px;margin-right:-28px}.igp-dots i{width:3px;height:3px;border-radius:50%;background:#c7c7c7}.igp-dots i.on{background:#3897f0}
+  .igp-cap{font-size:6px;padding:1px 6px 4px}.igp-line{height:4px;margin:0 6px 3px;border-radius:2px;background:#ececec;width:70%}.igp-line.s{width:45%}
   .media .m img,.media .m video{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center);display:block}
   .media .m.contain{background:none}
   .mk{position:absolute;inset:0;background-size:cover;background-position:center}
@@ -205,7 +212,7 @@ const PROJECTS=[
         [{i:'img/p/tedxie-5.webp',ar:2000/1332},{i:'img/p/tedxie-6.webp',ar:2000/1333},{i:'img/p/tedxie-7.webp',ar:2000/1332}]]},
  {name:'Tails.com',thumb:'img/grid-tails.webp',tags:'Community management · Social media · Content creation · Influencer marketing · Reporting · Illustration',
   text:'Managed community management for the Tails.com social media accounts, alongside creating content for stories and posts, including Pet of the Week features and personalised pet illustrations. Ran the brand’s Facebook group community, creating content and engaging with members, while coordinating influencer partnerships and preparing performance reports to track engagement and campaign results.',
-  shrink:.82,rows:[[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',ar:720/900,restart:1},{i:'img/p/tails-zara.webp',ar:707/1000},{ph:1,stories:7,ar:287/574}],
+  shrink:.82,rows:[[{igpost:1,v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',ar:287/574},{i:'img/p/tails-zara.webp',ar:707/1000},{ph:1,stories:7,ar:287/574}],
         [{i:'img/p/tails-petweek.webp',ar:1000/510}]]},
  {name:'Coffee Book',thumb:'img/grid-coffeebook.webp',phone:{v:'video/coffeebook-app.mp4',poster:'img/p/coffeebook-app-poster.webp'},full:'img/p/coffeebook-full.webp',tags:'Market research · Branding · Visual identity · UI design · UX design · App design',
   text:'Conducted market research and created the branding and UI/UX design for Coffee Book’s ordering app, giving the café’s customers an easy way to browse the full menu, discover the latest offers and place orders in a few taps. Designed the app’s visual language, mapped the user journey from menu to checkout, and crafted an interface that feels intuitive, warm and true to the café.',rows:[[{ar:1},{ar:1}],[{ar:2.05}]]},
@@ -238,7 +245,8 @@ function homog(q,w,h){ // map rect (0,0,w,h) onto quad q=[tl,tr,br,bl]
 const TAN_Q=[[88.43,193.27],[236.86,130.68],[410.28,413.31],[251.67,483.97]]; // screen corners (slightly enlarged) in px of the 470x610 media box
 function phonePage(p){const ph=p.phone;
  return `<div class="media" style="overflow:hidden"><div class="mk" style="background-image:url(img/p/cb-bg-tan.webp)"><div class="mkv" style="transform:${homog(TAN_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><b class="hidepill"></b></div><img src="img/p/cb-ov-tan.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%"></div></div>`;}
-function mediaEl(m,style,cls=''){if(m.ph){const n=m.stories; return `<div class="m tph" style="${style}"><div class="tph-scr"><div class="tph-st"><div class="tph-track">${Array.from({length:n},(_,k)=>`<img src="img/p/tails-stories/story-${k+1}.webp" alt="" loading="lazy">`).join('')}</div><div class="tph-bars">${'<i><b></b></i>'.repeat(n)}</div></div><div class="tph-reply">Send message</div></div><img class="tph-frame" src="img/p/tails-phone.png" alt=""></div>`;}if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"${m.restart?' data-restart="1"':''}></video></div>`
+function mediaEl(m,style,cls=''){if(m.igpost){const ic=(d)=>`<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+ return `<div class="m tph" style="${style}"><div class="tph-scr igp"><div class="igp-top">${ic('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/>')}<b>Instagram</b>${ic('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/>')}</div><div class="igp-user"><i></i><b>tails.com</b><span>···</span></div><div class="igp-media"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div><div class="igp-act">${ic('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/>')}${ic('<path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/>')}${ic('<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/>')}<span class="igp-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>${ic('<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>')}</div><div class="igp-cap"><b>tails.com</b> Bonfire Night tips</div><div class="igp-line"></div><div class="igp-line s"></div></div><img class="tph-frame" src="img/p/tails-phone.png" alt=""></div>`;}if(m.ph){const n=m.stories; return `<div class="m tph" style="${style}"><div class="tph-scr"><div class="tph-st"><div class="tph-track">${Array.from({length:n},(_,k)=>`<img src="img/p/tails-stories/story-${k+1}.webp" alt="" loading="lazy">`).join('')}</div><div class="tph-bars">${'<i><b></b></i>'.repeat(n)}</div></div><div class="tph-reply">Send message</div></div><img class="tph-frame" src="img/p/tails-phone.png" alt=""></div>`;}if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"${m.restart?' data-restart="1"':''}></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
 function justify(rows,k=1){ // whole images, no cropping; every row exactly the same width so edges line up
   const sumAr=rows.map(r=>r.reduce((a,m)=>a+m.ar,0));
@@ -424,9 +432,13 @@ document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e
 fit();setShift();
 
 // Tails.com stories: slide one after another like Instagram
-(function(){let k=0,t;function step(){document.querySelectorAll('.tph').forEach(p=>{const tr=p.querySelector('.tph-track'),bars=[...p.querySelectorAll('.tph-bars i')],n=bars.length,i=k%n;
+(function(){let k=0,t;function step(){document.querySelectorAll('.tph').forEach(p=>{if(!p.querySelector('.tph-track'))return;const tr=p.querySelector('.tph-track'),bars=[...p.querySelectorAll('.tph-bars i')],n=bars.length,i=k%n;
   tr.style.transform=`translateX(${-i*100}%)`;bars.forEach((b,j)=>{b.classList.toggle('done',j<i);b.classList.remove('on');});void bars[i].offsetWidth;bars[i].classList.add('on');});k++;}
  window.tphReset=()=>{clearInterval(t);k=0;step();t=setInterval(step,2300);}; tphReset();})();
+
+// Instagram post phone: carousel dots follow the post's slides
+document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d=[...p.querySelectorAll('.igp-dots i')];
+ v.addEventListener('timeupdate',()=>{if(!v.duration)return;const i=Math.min(d.length-1,Math.floor(v.currentTime/v.duration*d.length));d.forEach((x,j)=>x.classList.toggle('on',j===i));});});
 </script>
 </body>
 </html>
