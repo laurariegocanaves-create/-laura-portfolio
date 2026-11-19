@@ -116,11 +116,10 @@
   .media .m{position:absolute;background:#dcdad2}
   .media .m img,.media .m video{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center);display:block}
   .media .m.contain{background:none}
-  .phone{position:absolute;left:75%;top:50%;transform:translate(-50%,-50%);width:var(--pw);aspect-ratio:9/19.5;border-radius:calc(var(--pw)*.16);background:#111;padding:calc(var(--pw)*.035);box-shadow:0 18px 30px -10px rgba(0,0,0,.45),0 2px 4px rgba(0,0,0,.3),inset 0 0 0 1.5px #3a3a3a}
-  .ph-scr{width:100%;height:100%;border-radius:calc(var(--pw)*.13);overflow:hidden;background:#efe8dc;display:grid;place-items:center}
-  .ph-scr video{width:100%;height:100%;object-fit:cover;display:block}
-  .ph-ph{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8a7f70;text-align:center;line-height:1.6}
-  .ph-notch{position:absolute;top:calc(var(--pw)*.06);left:50%;transform:translateX(-50%);width:44%;height:calc(var(--pw)*.1);border-radius:99px;background:#111;z-index:1}
+  .mk{position:absolute;inset:0;background-size:cover;background-position:center}
+  .mkv{position:absolute;left:0;top:0;width:443px;height:960px;transform-origin:0 0;border-radius:52px;overflow:hidden;background:#000}
+  .mkv video{width:100%;height:100%;object-fit:cover;display:block}
+  .mkv i{position:absolute;left:27%;top:1.6%;width:46%;height:4.2%;border-radius:99px;background:#060606}
   .media .m.contain img,.media .m.contain video{object-fit:contain}
   .media .canv{position:absolute;overflow:hidden}
   .media .canv .m{background:none}
@@ -218,8 +217,14 @@ const PROJECTS=[
         [{i:'img/p/illu-cat.webp',ar:1036/1382},{i:'img/p/illu-dog.webp',ar:1036/1382}]]}
 ];
 const MW=470, MH=610, GAP=10;
-function phonePage(p){const ph=p.phone; const scr=ph.v?`<video src="${ph.v}" poster="${ph.poster||''}" muted loop playsinline preload="none"></video>`:`<div class="ph-ph">app video<br>coming soon</div>`;
- return `<div style="position:absolute;left:0;top:0;bottom:0;width:50%;background:url(${p.full}) center/cover"></div><div class="phone" style="--pw:150px"><div class="ph-scr">${scr}</div><div class="ph-notch"></div></div>`;}
+function homog(q,w,h){ // map rect (0,0,w,h) onto quad q=[tl,tr,br,bl]
+ const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]]=q; const dx1=x1-x2,dx2=x3-x2,dy1=y1-y2,dy2=y3-y2,sx=x0-x1+x2-x3,sy=y0-y1+y2-y3;
+ const den=dx1*dy2-dx2*dy1, g=(sx*dy2-dx2*sy)/den, hh=(dx1*sy-sx*dy1)/den;
+ const a=x1-x0+g*x1,b=x3-x0+hh*x3,d=y1-y0+g*y1,e=y3-y0+hh*y3;
+ return `matrix3d(${a/w},${d/w},0,${g/w},${b/h},${e/h},0,${hh/h},0,0,1,0,${x0},${y0},0,1)`;}
+const SUEDE_Q=[[237.45,107.57],[441.28,146.68],[312.12,647.9],[107.24,594.99]]; // screen corners of the phone in img/p/cb-mock-suede.webp, in page px
+function phonePage(p){const ph=p.phone;
+ return `<div class="media" style="overflow:hidden"><div style="position:absolute;left:-4.65px;top:0;width:550px;height:700px;transform:scale(.87143);transform-origin:0 0"><div class="mk" style="background-image:url(img/p/cb-mock-suede.webp)"><div class="mkv" style="transform:${homog(SUEDE_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><i></i></div></div></div></div>`;}
 function mediaEl(m,style,cls=''){if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
 function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
