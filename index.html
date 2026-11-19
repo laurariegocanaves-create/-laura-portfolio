@@ -114,9 +114,10 @@
   .stats span{font-size:var(--t13);color:var(--mute)}
   .media{position:absolute;left:40px;top:40px;width:470px;height:610px}
   .media .m{position:absolute;background:#dcdad2}
-  .media .m.tph{background:#121212;border-radius:22px;padding:5px;box-shadow:inset 0 0 0 1.5px #3b3b3b,0 10px 22px -8px rgba(0,0,0,.45)}
-  .tph-scr{position:relative;width:100%;height:100%;border-radius:18px;background:#000;overflow:hidden}
-  .tph-st{position:absolute;left:0;right:0;top:7%;aspect-ratio:9/16;border-radius:8px;overflow:hidden}
+  .media .m.tph{background:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.28))}
+  .tph-scr{position:absolute;left:5.57%;top:2.96%;width:89.2%;height:94.25%;border-radius:12% / 5.6%;background:#000;overflow:hidden}
+  .media .m img.tph-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+  .tph-st{position:absolute;left:0;right:0;top:6.5%;aspect-ratio:9/16;border-radius:8px;overflow:hidden}
   .tph-track{display:flex;height:100%;transition:transform .55s cubic-bezier(.45,.05,.25,1)}
   .tph-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block}
   .tph-bars{position:absolute;top:6px;left:6px;right:6px;display:flex;gap:2px}
@@ -125,8 +126,7 @@
   .tph-bars i.done b{width:100%}
   .tph-bars i.on b{animation:tphfill 3.2s linear forwards}
   @keyframes tphfill{to{width:100%}}
-  .tph-reply{position:absolute;left:9px;right:9px;bottom:4.5%;height:24px;border:1px solid rgba(255,255,255,.4);border-radius:99px;color:rgba(255,255,255,.75);font-size:8.5px;line-height:22px;padding-left:10px;letter-spacing:.02em}
-  .tph-isl{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:32%;height:12px;border-radius:99px;background:#000}
+  .tph-reply{position:absolute;left:9px;right:9px;bottom:3.5%;height:20px;border:1px solid rgba(255,255,255,.4);border-radius:99px;color:rgba(255,255,255,.75);font-size:7px;line-height:18px;padding-left:10px;letter-spacing:.02em}
   .media .m img,.media .m video{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center);display:block}
   .media .m.contain{background:none}
   .mk{position:absolute;inset:0;background-size:cover;background-position:center}
@@ -205,7 +205,8 @@ const PROJECTS=[
         [{i:'img/p/tedxie-5.webp',ar:2000/1332},{i:'img/p/tedxie-6.webp',ar:2000/1333},{i:'img/p/tedxie-7.webp',ar:2000/1332}]]},
  {name:'Tails.com',thumb:'img/grid-tails.webp',tags:'Community management · Social media · Content creation · Influencer marketing · Reporting · Illustration',
   text:'Managed community management for the Tails.com social media accounts, alongside creating content for stories and posts, including Pet of the Week features and personalised pet illustrations. Ran the brand’s Facebook group community, creating content and engaging with members, while coordinating influencer partnerships and preparing performance reports to track engagement and campaign results.',
-  canvas:{ar:470/356.6,items:[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',x:0.00,y:0.00,w:33.36,h:54.96},{i:'img/p/tails-zara.webp',x:35.48,y:0.00,w:27.35,h:54.96},{i:'img/p/tails-petweek.webp',x:0.00,y:57.76,w:62.83,h:42.24},{ph:1,stories:7,x:64.96,y:0.00,w:35.04,h:100.00}]}},
+  shrink:.82,rows:[[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',ar:720/900},{i:'img/p/tails-zara.webp',ar:707/1000},{ph:1,stories:7,ar:287/574}],
+        [{i:'img/p/tails-petweek.webp',ar:1000/510}]]},
  {name:'Coffee Book',thumb:'img/grid-coffeebook.webp',phone:{v:'video/coffeebook-app.mp4',poster:'img/p/coffeebook-app-poster.webp'},full:'img/p/coffeebook-full.webp',tags:'Market research · Branding · Visual identity · UI design · UX design · App design',
   text:'Conducted market research and created the branding and UI/UX design for Coffee Book’s ordering app, giving the café’s customers an easy way to browse the full menu, discover the latest offers and place orders in a few taps. Designed the app’s visual language, mapped the user journey from menu to checkout, and crafted an interface that feels intuitive, warm and true to the café.',rows:[[{ar:1},{ar:1}],[{ar:2.05}]]},
  {name:'Beefeater Gin & Lemon',thumb:'img/grid-gin.webp',tags:'Launch strategy · Owned, paid and earned media · Influencer marketing · Email marketing · Customer experience',
@@ -237,12 +238,12 @@ function homog(q,w,h){ // map rect (0,0,w,h) onto quad q=[tl,tr,br,bl]
 const TAN_Q=[[88.43,193.27],[236.86,130.68],[410.28,413.31],[251.67,483.97]]; // screen corners (slightly enlarged) in px of the 470x610 media box
 function phonePage(p){const ph=p.phone;
  return `<div class="media" style="overflow:hidden"><div class="mk" style="background-image:url(img/p/cb-bg-tan.webp)"><div class="mkv" style="transform:${homog(TAN_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><b class="hidepill"></b></div><img src="img/p/cb-ov-tan.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%"></div></div>`;}
-function mediaEl(m,style,cls=''){if(m.ph){const n=m.stories; return `<div class="m tph" style="${style}"><div class="tph-scr"><div class="tph-st"><div class="tph-track">${Array.from({length:n},(_,k)=>`<img src="img/p/tails-stories/story-${k+1}.webp" alt="" loading="lazy">`).join('')}</div><div class="tph-bars">${'<i><b></b></i>'.repeat(n)}</div></div><div class="tph-reply">Send message</div></div><b class="tph-isl"></b></div>`;}if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
+function mediaEl(m,style,cls=''){if(m.ph){const n=m.stories; return `<div class="m tph" style="${style}"><div class="tph-scr"><div class="tph-st"><div class="tph-track">${Array.from({length:n},(_,k)=>`<img src="img/p/tails-stories/story-${k+1}.webp" alt="" loading="lazy">`).join('')}</div><div class="tph-bars">${'<i><b></b></i>'.repeat(n)}</div></div><div class="tph-reply">Send message</div></div><img class="tph-frame" src="img/p/tails-phone.png" alt=""></div>`;}if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
-function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
+function justify(rows,k=1){ // whole images, no cropping; every row exactly the same width so edges line up
   const sumAr=rows.map(r=>r.reduce((a,m)=>a+m.ar,0));
   const heightAt=W=>rows.reduce((t,r,i)=>t+(W-GAP*(r.length-1))/sumAr[i],0)+GAP*(rows.length-1);
-  let W=MW; if(heightAt(W)>MH){let lo=50,hi=MW;for(let i=0;i<40;i++){const m=(lo+hi)/2;heightAt(m)>MH?hi=m:lo=m;}W=lo;}
+  let W=MW*k; if(heightAt(W)>MH*k){let lo=50,hi=MW;for(let i=0;i<40;i++){const m=(lo+hi)/2;heightAt(m)>MH*k?hi=m:lo=m;}W=lo;}
   const x0=(MW-W)/2; let y=(MH-heightAt(W))/2, out='';
   rows.forEach((r,ri)=>{const h=(W-GAP*(r.length-1))/sumAr[ri]; let x=x0;
     r.forEach((m,j)=>{const w=j===r.length-1? x0+W-x : m.ar*h; out+=mediaEl(m,`left:${x}px;top:${y}px;width:${w}px;height:${h}px`); x+=w+GAP;}); y+=h+GAP;});
@@ -271,7 +272,7 @@ const F={
  pgrid:()=>`<div class="pgrid">${PROJECTS.map((p,i)=>`<div class="cell" data-go="${i}"><div class="ph">${p.thumb?`<img src="${p.thumb}" alt="">`:''}</div><div class="cap">(${i+1}) ${p.name}</div></div>`).join('')}</div>`,
  ptext:(p,i)=>`<div class="pad"><p class="label">(${pad2(i+1)})</p><h2 class="h" style="margin-top:10px">${p.name}</h2><p class="tags">${p.tags}</p>
    <p class="body">${p.ph?`<span class="label">${p.thumb&&!p.noMedia?'Text to come':'Pictures and text to come'}</span>`:p.text}</p>${p.stats?`<div class="stats">${p.stats.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>`:''}</div>`,
- pmedia:(p)=>p.phone?phonePage(p):p.full?`<div style="position:absolute;inset:0;background:url(${p.full}) center/cover"></div>`:`<div class="media">${p.canvas?canvas(p.canvas):p.tiles?tiles(p.tiles,p.rows.flat()):justify(p.rows)}</div>`,
+ pmedia:(p)=>p.phone?phonePage(p):p.full?`<div style="position:absolute;inset:0;background:url(${p.full}) center/cover"></div>`:`<div class="media">${p.canvas?canvas(p.canvas):p.tiles?tiles(p.tiles,p.rows.flat()):justify(p.rows,p.shrink||1)}</div>`,
  numbers:()=>`<div class="pad"><p class="label">(III)</p><h2 class="h" style="margin-top:10px">In numbers</h2><ul class="prices">
    <li>Luxury hospitality brands<span class="dots"></span><b>15+</b></li><li>Creator collaborations<span class="dots"></span><b>60+</b></li><li>Brands worked with<span class="dots"></span><b>20+</b></li></ul></div>`,
  contact:()=>`<div class="pad" style="display:flex;flex-direction:column;justify-content:center"><p class="label">(Contact)</p>
