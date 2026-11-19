@@ -330,7 +330,7 @@ els.forEach(e=>{
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const wrap=document.getElementById('wrap');
 let layout='centred';
-function fit(){ if(MOBILE){ const sc=Math.min((innerWidth-28)/550,(innerHeight-140)/900); wrap.style.setProperty('--s',sc.toFixed(3)); return; } const k=layout==='centred'?0.68:1; const sc=Math.min((innerWidth-(layout==='centred'?0:80))*k/1100,(innerHeight-150)*k/700,1.15); wrap.style.setProperty('--s',sc.toFixed(3));}
+function fit(){ if(MOBILE){ const sc=Math.min((innerWidth-28)/550,(innerHeight-140)/900); wrap.style.setProperty('--s',sc.toFixed(3)); return; } const k=layout==='centred'?0.68:1; const sc=Math.min((innerWidth-(layout==='centred'?0:80))*k/1100,(innerHeight-210)*k/700,1.15); wrap.style.setProperty('--s',sc.toFixed(3));}
 const pf=new St.PageFlip(book,{width:550,height:MOBILE?900:700,size:'fixed',showCover:false,usePortrait:MOBILE,useMouseEvents:!MOBILE,drawShadow:true,maxShadowOpacity:.6,
   flippingTime:650,mobileScrollSupport:false,disableFlipByClick:true,showPageCorners:true,startZIndex:2});
 pf.loadFromHTML(document.querySelectorAll('#book .page'));
