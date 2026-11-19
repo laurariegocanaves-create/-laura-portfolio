@@ -114,6 +114,19 @@
   .stats span{font-size:var(--t13);color:var(--mute)}
   .media{position:absolute;left:40px;top:40px;width:470px;height:610px}
   .media .m{position:absolute;background:#dcdad2}
+  .media .m.tph{background:#121212;border-radius:22px;padding:5px;box-shadow:inset 0 0 0 1.5px #3b3b3b,0 10px 22px -8px rgba(0,0,0,.45)}
+  .tph-scr{position:relative;width:100%;height:100%;border-radius:18px;background:#000;overflow:hidden}
+  .tph-st{position:absolute;left:0;right:0;top:7%;aspect-ratio:9/16;border-radius:8px;overflow:hidden}
+  .tph-track{display:flex;height:100%;transition:transform .55s cubic-bezier(.45,.05,.25,1)}
+  .tph-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block}
+  .tph-bars{position:absolute;top:6px;left:6px;right:6px;display:flex;gap:2px}
+  .tph-bars i{flex:1;height:2px;border-radius:2px;background:rgba(255,255,255,.38);overflow:hidden}
+  .tph-bars b{display:block;height:100%;width:0;background:#fff}
+  .tph-bars i.done b{width:100%}
+  .tph-bars i.on b{animation:tphfill 3.2s linear forwards}
+  @keyframes tphfill{to{width:100%}}
+  .tph-reply{position:absolute;left:9px;right:9px;bottom:4.5%;height:24px;border:1px solid rgba(255,255,255,.4);border-radius:99px;color:rgba(255,255,255,.75);font-size:8.5px;line-height:22px;padding-left:10px;letter-spacing:.02em}
+  .tph-isl{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:32%;height:12px;border-radius:99px;background:#000}
   .media .m img,.media .m video{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center);display:block}
   .media .m.contain{background:none}
   .mk{position:absolute;inset:0;background-size:cover;background-position:center}
@@ -192,8 +205,7 @@ const PROJECTS=[
         [{i:'img/p/tedxie-5.webp',ar:2000/1332},{i:'img/p/tedxie-6.webp',ar:2000/1333},{i:'img/p/tedxie-7.webp',ar:2000/1332}]]},
  {name:'Tails.com',thumb:'img/grid-tails.webp',tags:'Community management · Social media · Content creation · Influencer marketing · Reporting · Illustration',
   text:'Managed community management for the Tails.com social media accounts, alongside creating content for stories and posts, including Pet of the Week features and personalised pet illustrations. Ran the brand’s Facebook group community, creating content and engaging with members, while coordinating influencer partnerships and preparing performance reports to track engagement and campaign results.',
-  rows:[[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',ar:720/900},{i:'img/p/tails-zara.webp',ar:707/1000}],
-        [{i:'img/p/tails-petweek.webp',ar:1000/510}]]},
+  canvas:{ar:470/356.6,items:[{v:'video/tails.mp4',poster:'img/p/tails-video-poster.webp',x:0.00,y:0.00,w:33.36,h:54.96},{i:'img/p/tails-zara.webp',x:35.48,y:0.00,w:27.35,h:54.96},{i:'img/p/tails-petweek.webp',x:0.00,y:57.76,w:62.83,h:42.24},{ph:1,stories:7,x:64.96,y:0.00,w:35.04,h:100.00}]}},
  {name:'Coffee Book',thumb:'img/grid-coffeebook.webp',phone:{v:'video/coffeebook-app.mp4',poster:'img/p/coffeebook-app-poster.webp'},full:'img/p/coffeebook-full.webp',tags:'Market research · Branding · Visual identity · UI design · UX design · App design',
   text:'Conducted market research and created the branding and UI/UX design for Coffee Book’s ordering app, giving the café’s customers an easy way to browse the full menu, discover the latest offers and place orders in a few taps. Designed the app’s visual language, mapped the user journey from menu to checkout, and crafted an interface that feels intuitive, warm and true to the café.',rows:[[{ar:1},{ar:1}],[{ar:2.05}]]},
  {name:'Beefeater Gin & Lemon',thumb:'img/grid-gin.webp',tags:'Launch strategy · Owned, paid and earned media · Influencer marketing · Email marketing · Customer experience',
@@ -225,7 +237,7 @@ function homog(q,w,h){ // map rect (0,0,w,h) onto quad q=[tl,tr,br,bl]
 const TAN_Q=[[88.43,193.27],[236.86,130.68],[410.28,413.31],[251.67,483.97]]; // screen corners (slightly enlarged) in px of the 470x610 media box
 function phonePage(p){const ph=p.phone;
  return `<div class="media" style="overflow:hidden"><div class="mk" style="background-image:url(img/p/cb-bg-tan.webp)"><div class="mkv" style="transform:${homog(TAN_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><b class="hidepill"></b></div><img src="img/p/cb-ov-tan.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%"></div></div>`;}
-function mediaEl(m,style,cls=''){if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
+function mediaEl(m,style,cls=''){if(m.ph){const n=m.stories; return `<div class="m tph" style="${style}"><div class="tph-scr"><div class="tph-st"><div class="tph-track">${Array.from({length:n},(_,k)=>`<img src="img/p/tails-stories/story-${k+1}.webp" alt="" loading="lazy">`).join('')}</div><div class="tph-bars">${'<i><b></b></i>'.repeat(n)}</div></div><div class="tph-reply">Send message</div></div><b class="tph-isl"></b></div>`;}if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
 function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
   const sumAr=rows.map(r=>r.reduce((a,m)=>a+m.ar,0));
@@ -347,7 +359,7 @@ function setShift(){const pi=pf.getCurrentPageIndex(), sp=spreadOf(pi);
   document.getElementById('food').classList.toggle('on',sp===1);}
 // videos: everything paused while pages move; only the open spread plays once it has landed
 function pauseAll(){document.querySelectorAll('#book video').forEach(v=>{if(!v.paused)v.pause();});}
-function playOpen(){const pi=pf.getCurrentPageIndex();
+function playOpen(){if(window.tphReset)tphReset();const pi=pf.getCurrentPageIndex();
   pages.forEach((pg,i)=>pg.querySelectorAll('video').forEach(v=>{ if(i===pi||(!MOBILE&&i===pi+1)){ if(v.preload!=='auto'){v.preload='auto';} v.play().catch(()=>{}); } else if(!v.paused) v.pause(); }));
   // warm up the next spread's videos so they start instantly
   [pi+2,pi+3].forEach(i=>pages[i]&&pages[i].querySelectorAll('video').forEach(v=>{if(v.preload==='none'){v.preload='metadata';v.load();}}));}
@@ -409,6 +421,11 @@ document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e
 
 
 fit();setShift();
+
+// Tails.com stories: slide one after another like Instagram
+(function(){let k=0,t;function step(){document.querySelectorAll('.tph').forEach(p=>{const tr=p.querySelector('.tph-track'),bars=[...p.querySelectorAll('.tph-bars i')],n=bars.length,i=k%n;
+  tr.style.transform=`translateX(${-i*100}%)`;bars.forEach((b,j)=>{b.classList.toggle('done',j<i);b.classList.remove('on');});void bars[i].offsetWidth;bars[i].classList.add('on');});k++;}
+ window.tphReset=()=>{clearInterval(t);k=0;step();t=setInterval(step,3200);}; tphReset();})();
 </script>
 </body>
 </html>
