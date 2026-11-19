@@ -361,7 +361,7 @@ function setShift(){const pi=pf.getCurrentPageIndex(), sp=spreadOf(pi);
 // videos: everything paused while pages move; only the open spread plays once it has landed
 function pauseAll(){document.querySelectorAll('#book video').forEach(v=>{if(!v.paused)v.pause();});}
 function playOpen(){if(window.tphReset)tphReset();const pi=pf.getCurrentPageIndex();
-  pages.forEach((pg,i)=>pg.querySelectorAll('video').forEach(v=>{ if(i===pi||(!MOBILE&&i===pi+1)){ if(v.preload!=='auto'){v.preload='auto';} if(v.dataset.restart&&v.paused){try{v.currentTime=0;}catch(e){}} v.play().catch(()=>{}); } else if(!v.paused) v.pause(); }));
+  pages.forEach((pg,i)=>pg.querySelectorAll('video').forEach(v=>{ if(i===pi||(!MOBILE&&i===pi+1)){ if(v.preload!=='auto'){v.preload='auto';} if(v.paused){try{v.currentTime=0;}catch(e){}} v.play().catch(()=>{}); } else if(!v.paused) v.pause(); }));
   // warm up the next spread's videos so they start instantly
   [pi+2,pi+3].forEach(i=>pages[i]&&pages[i].querySelectorAll('video').forEach(v=>{if(v.preload==='none'){v.preload='metadata';v.load();}}));}
 function go(dir,fast){ if(busy) return false; const sp=spreadOf(pf.getCurrentPageIndex()), t=sp+dir; if(t<0||t>S-1) return false;
