@@ -219,7 +219,7 @@ const PROJECTS=[
 ];
 const MW=470, MH=610, GAP=10;
 function phonePage(p){const ph=p.phone; const scr=ph.v?`<video src="${ph.v}" poster="${ph.poster||''}" muted loop playsinline preload="none"></video>`:`<div class="ph-ph">app video<br>coming soon</div>`;
- return `<div style="position:absolute;left:0;top:0;bottom:0;width:50%;background:url(${p.full}) center/cover"></div><div class="phone" style="--pw:190px"><div class="ph-scr">${scr}</div><div class="ph-notch"></div></div>`;}
+ return `<div style="position:absolute;left:0;top:0;bottom:0;width:50%;background:url(${p.full}) center/cover"></div><div class="phone" style="--pw:150px"><div class="ph-scr">${scr}</div><div class="ph-notch"></div></div>`;}
 function mediaEl(m,style,cls=''){if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
 function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
