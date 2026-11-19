@@ -224,7 +224,7 @@ function homog(q,w,h){ // map rect (0,0,w,h) onto quad q=[tl,tr,br,bl]
  return `matrix3d(${a/w},${d/w},0,${g/w},${b/h},${e/h},0,${hh/h},0,0,1,0,${x0},${y0},0,1)`;}
 const SUEDE_Q=[[237.45,107.57],[441.28,146.68],[312.12,647.9],[107.24,594.99]]; // screen corners of the phone in img/p/cb-mock-suede.webp, in page px
 function phonePage(p){const ph=p.phone;
- return `<div class="media" style="overflow:hidden"><div style="position:absolute;left:-4.65px;top:0;width:550px;height:700px;transform:scale(.87143);transform-origin:0 0"><div class="mk" style="background-image:url(img/p/cb-mock-suede.webp)"><div class="mkv" style="transform:${homog(SUEDE_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><i></i></div></div></div></div>`;}
+ return `<div style="position:absolute;left:75px;top:95.5px;width:400px;height:509px;overflow:hidden"><div style="position:absolute;left:0;top:0;width:550px;height:700px;transform:scale(.72727);transform-origin:0 0"><div class="mk" style="background-image:url(img/p/cb-mock-suede.webp)"><div class="mkv" style="transform:${homog(SUEDE_Q,443,960)}"><video src="${ph.v}" poster="${ph.poster}" muted loop playsinline preload="none"></video><i></i></div></div></div></div>`;}
 function mediaEl(m,style,cls=''){if(m.contain)cls+=' contain'; if(!m.i&&!m.v)return `<div class="m" style="${style}"></div>`; return m.v?`<div class="m ${cls}" style="${style}"><video src="${m.v}" poster="${m.poster}" muted loop playsinline preload="none"></video></div>`
   :`<div class="m ${cls}" style="${style}"><img src="${m.i}" alt="" loading="lazy" decoding="async"></div>`;}
 function justify(rows){ // whole images, no cropping; every row exactly the same width so edges line up
