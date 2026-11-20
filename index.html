@@ -517,10 +517,10 @@ document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d
 // real contact + cast shadow under the closed magazine, drawn on the table
 (function(){const d=document.createElement('div');d.id='magsh';document.body.appendChild(d);
  function f(){const c=document.querySelector('.cover-page');if(!c)return;const r=c.getBoundingClientRect();if(!r.width)return;
-  d.style.left=r.left+'px';d.style.top=r.top+'px';d.style.width=r.width+'px';d.style.height=r.height+'px';
+  const ix=r.width*0.035,it=r.height*0.04;d.style.left=(r.left+ix)+'px';d.style.top=(r.top+it)+'px';d.style.width=(r.width-2*ix)+'px';d.style.height=(r.height-it-2)+'px';
   d.style.transform='rotate('+(getComputedStyle(document.querySelector('.wrap')).getPropertyValue('--rot')||'0deg')+')';
   d.style.boxShadow='3px 4px 2px rgba(25,10,0,.6), 9px 13px 10px rgba(20,8,0,.5), 20px 28px 26px rgba(20,8,0,.42), 36px 48px 52px rgba(20,8,0,.28)';
-  d.style.background='rgba(20,8,0,.4)';}
+  d.style.background='transparent';}
  setInterval(f,250);addEventListener('resize',f);f();})();
 
 // back to the table: close button, Escape, or clicking the table around the open magazine
