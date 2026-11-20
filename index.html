@@ -530,7 +530,7 @@ document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d
  document.querySelector('.stage').addEventListener('click',e=>{ if(!document.body.classList.contains('is-open')) return; if(e.target.closest('.stf__block')||e.target.closest('a,button')) return; close(); });})();
 
 // keep the whole table visible: its bottom edge sits a little above the banner
-(function(){const IW=2656,IH=1024,TOP=0.112,BOT=0.915;
+(function(){const IW=2496,IH=1024,TOP=0.112,BOT=0.915;
  function f(){const el=document.getElementById('table');if(!el)return;const W=el.clientWidth,H=el.clientHeight;if(!W||!H)return;
   const gap=Math.max(18,H*0.03);
   // scale: cover by default, but never so big that the table can't fit between nav (54px) and the gap
