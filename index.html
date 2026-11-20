@@ -191,6 +191,8 @@
   body.is-open #table{transform:scale(1.18);filter:blur(3px) brightness(.72)}
   html,body{background:#3a2414}
   #table{z-index:0!important}
+  #tablefill{position:fixed;inset:0 0 var(--banh,50px) 0;z-index:0;pointer-events:none;background:var(--tbg) center/cover no-repeat;filter:blur(14px) brightness(.8);transform:scale(1.08);transition:transform 1s cubic-bezier(.45,.05,.25,1),filter 1s}
+  body.is-open #tablefill{transform:scale(1.25);filter:blur(16px) brightness(.6)}
   .wrap{transition:transform .9s cubic-bezier(.45,.05,.25,1)}
   body:not(.is-open) .wrap{cursor:pointer;margin-top:var(--tshift,-25px)}
   .wrap{transition:margin-top .9s cubic-bezier(.45,.05,.25,1)}
@@ -219,7 +221,7 @@
 
 </style>
 </head>
-<body><div id="table"></div>
+<body><div id="tablefill"></div><div id="table"></div>
 <div class="table"></div>
 <div class="bar">
   <span>Laura Riego Cànaves</span>
@@ -497,7 +499,7 @@ document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d
  rugwalnut:{img:'t-rugwalnut.webp',nav:'#f3efe4',ban:'#f3efe4',banc:'#4a2a16',bg:'#4a4a30',k:.5,rot:'-0.8deg'},
  glass:{img:'t-glass.webp',nav:'#2a2620',ban:'#f3efe4',banc:'#2a2620',bg:'#e8e2d6',k:.48,rot:'-2deg'}};
  const c=T[new URLSearchParams(location.search).get('t')||'rugwalnut2'];window.TK=c.k;window.TROT=c.rot;window.TTILT=c.tilt||'0deg';
- const st=document.createElement('style');st.textContent=`#table{--tbg:${c.img?`url(${c.img})`:'none'}}${c.img?'':'#table{display:none}.table{display:block!important}'}html,body{background:${c.bg}!important}
+ const st=document.createElement('style');st.textContent=`#table,#tablefill{--tbg:${c.img?`url(${c.img})`:'none'}}${c.img?'':'#table{display:none}.table{display:block!important}'}html,body{background:${c.bg}!important}
  .bar span,.bar a{color:${c.nav}!important}
  .marquee{background:${c.ban}!important;border-top:0!important}.marquee div{color:${c.banc}!important}
  .hint{color:#2a2620!important;background:rgba(243,239,228,.92);padding:7px 14px;border-radius:99px;text-shadow:none!important}`;document.head.appendChild(st);fit&&fit();})();
@@ -528,6 +530,18 @@ document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d
  document.getElementById('closeMag').addEventListener('click',e=>{e.stopPropagation();close();});
  addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
  document.querySelector('.stage').addEventListener('click',e=>{ if(!document.body.classList.contains('is-open')) return; if(e.target.closest('.stf__block')||e.target.closest('a,button')) return; close(); });})();
+
+// keep the whole table visible: its bottom edge sits a little above the banner
+(function(){const IW=1536,IH=1024,TOP=0.112,BOT=0.915;
+ function f(){const el=document.getElementById('table');if(!el)return;const W=el.clientWidth,H=el.clientHeight;if(!W||!H)return;
+  const gap=Math.max(18,H*0.03);
+  // scale: cover by default, but never so big that the table can't fit between nav (54px) and the gap
+  let sc=Math.max(W/IW,H/IH); const maxSc=(H-gap-54)/((BOT-TOP)*IH); if(sc>maxSc) sc=Math.max(maxSc,H/IH*0.9);
+  const w=IW*sc,h=IH*sc; let y=(H-h)/2;
+  const tb=y+BOT*h; if(tb>H-gap) y-= (tb-(H-gap));
+  const tt=y+TOP*h; if(tt<54) y+= (54-tt);
+  el.style.backgroundSize=w+'px '+h+'px'; el.style.backgroundPosition=((W-w)/2)+'px '+y+'px';}
+ addEventListener('resize',f); setTimeout(f,50); setTimeout(f,400); f();})();
 </script>
 </body>
 </html>
