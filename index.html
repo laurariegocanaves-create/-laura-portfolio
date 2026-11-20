@@ -213,6 +213,10 @@
   body:not(.is-open) #book .page:first-child,body:not(.is-open) #book{border-radius:2px}
   #hint{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);color:#f5ecdf;font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.85;transition:opacity .4s;text-shadow:0 1px 6px rgba(0,0,0,.5);pointer-events:none}
   body.is-open #hint{opacity:0}
+  #closeMag{position:fixed;left:50%;bottom:calc(var(--banh,50px) + 14px);transform:translateX(-50%);z-index:40;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#2a2620;background:rgba(243,239,228,.92);border:0;border-radius:99px;padding:7px 14px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s}
+  body.is-open #closeMag{opacity:1;pointer-events:auto}
+  body.is-open .stage{cursor:zoom-out}
+
 </style>
 </head>
 <body><div id="table"></div>
@@ -221,7 +225,7 @@
   <span>Laura Riego Cànaves</span>
   <div class="links"><a href="#about" data-nav="about">About</a><a href="#projects" data-nav="projects">Projects</a><a href="#contact" data-nav="contact">Contact</a></div>
 </div>
-<div class="hint" id="hint">CLICK THE MAGAZINE TO OPEN IT</div>
+<div class="hint" id="hint">CLICK THE MAGAZINE TO OPEN IT</div><button id="closeMag" type="button" aria-label="Close the magazine">Close magazine ✕</button>
 <script>if(matchMedia("(max-width: 600px), (pointer: coarse) and (max-width: 900px)").matches)document.getElementById("hint").textContent="SWIPE TO TURN THE PAGE";</script>
 <div class="stage"><div class="wrap" id="wrap"><div class="stack l" id="stackL"></div><div class="stack r" id="stackR"></div><div id="book"></div></div></div>
 <div class="marquee"><div id="mq"></div></div>
@@ -518,6 +522,12 @@ document.querySelectorAll('.igp').forEach(p=>{const v=p.querySelector('video'),d
   d.style.boxShadow='3px 4px 2px rgba(25,10,0,.6), 9px 13px 10px rgba(20,8,0,.5), 20px 28px 26px rgba(20,8,0,.42), 36px 48px 52px rgba(20,8,0,.28)';
   d.style.background='rgba(20,8,0,.4)';}
  setInterval(f,250);addEventListener('resize',f);f();})();
+
+// back to the table: close button, Escape, or clicking the table around the open magazine
+(function(){const close=()=>{ if(document.body.classList.contains('is-open')) goSpread(0); };
+ document.getElementById('closeMag').addEventListener('click',e=>{e.stopPropagation();close();});
+ addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+ document.querySelector('.stage').addEventListener('click',e=>{ if(!document.body.classList.contains('is-open')) return; if(e.target.closest('.stf__block')||e.target.closest('a,button')) return; close(); });})();
 </script>
 </body>
 </html>
